@@ -1,7 +1,8 @@
 import React from 'react';
 import GlobalStyle from '../../styles/GlobalStyle'
+import Button from '../../components/Button/Button'
 
-function App() {
+const App = () => {
   return (
     <div>
       <GlobalStyle />
