@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Button from '../components/Button'
 
 const Container = styled.div`
   width: 100%;
@@ -29,8 +30,9 @@ const LocationList = styled.ul``
 const CreatePage = () => {
   return (
     <Container>
-      <TripNameInput type="text" placeholder="Trip Name"/>
+      <TripNameInput type="text" placeholder="Trip Name" />
       <LocationList></LocationList>
+      <Button>+ Add Location</Button>
     </Container>
   )
 }

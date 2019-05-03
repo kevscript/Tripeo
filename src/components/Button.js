@@ -3,20 +3,19 @@ import styled from 'styled-components'
 
 const ButtonContainer = styled.div`
   cursor: pointer;
-  margin: 2rem 0;
-  padding: 15px 45px;
-  font-size: 2.6rem;
+  margin: ${props => props.big ? '2rem 0' : '1rem 0'};
+  padding: ${props => props.big ? '15px 45px' : '5px 15px'};
+  font-size: ${props => props.big ? '2.6rem' : '1.6rem'};
   border-radius: 50px;
-  border: 1px solid rgba(0,0,0,0.1);
   background: lightcoral;
   color: papayawhip;
 `
 
 ButtonContainer.displayName = 'ButtonContainer'
 
-const Button = ({ children }) => {
+const Button = ({ children, big, ...props }) => {
   return (
-    <ButtonContainer>
+    <ButtonContainer big={big}>
       {children}
     </ButtonContainer>
   )

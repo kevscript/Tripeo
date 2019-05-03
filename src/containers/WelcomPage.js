@@ -34,7 +34,7 @@ const WelcomePage = () => {
 
       <Title>TripWeather</Title>
       <Para>Catch the weather before it catches you.</Para>
-      <Button>
+      <Button big>
         <CreateLink to="/create">
           Get Ready
         </CreateLink>
