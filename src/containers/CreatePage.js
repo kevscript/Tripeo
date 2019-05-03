@@ -8,6 +8,7 @@ const Container = styled.div`
   background: papayawhip;
   display: flex;
   align-items: center;
+  padding: 5%;
 `
 
 const TripNameInput = styled.input`
@@ -23,11 +24,13 @@ const TripNameInput = styled.input`
   }
 `
 
+const LocationList = styled.ul``
 
 const CreatePage = () => {
   return (
     <Container>
       <TripNameInput type="text" placeholder="Trip Name"/>
+      <LocationList></LocationList>
     </Container>
   )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import Button from '../components/Button'
 
 const Container = styled.div`
   display: flex;
@@ -16,17 +17,6 @@ const Title = styled.h1`
   text-transform: uppercase;
   font-size: 4.2rem;
   letter-spacing: 0.1rem;
-`
-
-const Button = styled.div`
-  cursor: pointer;
-  margin: 2rem 0;
-  padding: 15px 45px;
-  font-size: 2.6rem;
-  border-radius: 50px;
-  border: 1px solid rgba(0,0,0,0.1);
-  background: lightcoral;
-  color: papayawhip;
 `
 
 const CreateLink = styled(Link)`
