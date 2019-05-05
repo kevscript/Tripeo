@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   html {
-    font-size: 62.5%;
+    font-size: 14px;
   }
 
   body {
@@ -18,7 +18,6 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #333;
-    font-size: 1.6rem;
   }
 
   code {
