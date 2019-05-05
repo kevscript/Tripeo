@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Button from '../components/Button'
+import TripForm from '../components/TripForm'
 
 const Container = styled.div`
   width: 100%;
@@ -27,12 +28,16 @@ const TripNameInput = styled.input`
 
 const LocationList = styled.ul``
 
-const CreatePage = () => {
+const CreatePage = ({startDate, endDate, handleStartDateChange, handleEndDateChange}) => {
   return (
     <Container>
       <TripNameInput type="text" placeholder="Trip Name" />
-      <LocationList></LocationList>
-      <Button>+ Add Location</Button>
+      <TripForm 
+        startDate={startDate} 
+        endDate={endDate} 
+        handleStartDateChange={handleStartDateChange}
+        handleEndDateChange={handleEndDateChange}
+      />
     </Container>
   )
 }
