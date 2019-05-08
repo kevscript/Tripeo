@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import TripForm from '../components/TripForm'
+import LocationCard from '../components/LocationCard'
 
 const Container = styled.div`
   width: 100%;
+  margin: 0 auto;
   flex-direction: column;
   min-height: 100vh;
   background: papayawhip;
@@ -25,6 +27,11 @@ const TripNameInput = styled.input`
   }
 `
 
+const CheckpointsList = styled.ul`
+  list-style: none;
+  margin: 0 auto;
+`
+
 const CreatePage = ({ trip, startDate, endDate, handleStartDateChange, handleEndDateChange, handleLocation, handleFormSubmit }) => {
   return (
     <Container>
@@ -39,11 +46,11 @@ const CreatePage = ({ trip, startDate, endDate, handleStartDateChange, handleEnd
       />
 
       {trip.length > 0 &&
-        <ul>
-          {trip.map((check, i) => {
-            return <li key={i}>{check.location.name} from {check.from.toUTCString()} to {check.to.toUTCString()}</li>
+        <CheckpointsList>
+          {trip.map((checkpoint, i) => {
+            return <LocationCard key={i} checkpoint={checkpoint} />
           })}
-        </ul>
+        </CheckpointsList>
       }
 
     </Container>

@@ -5,7 +5,7 @@ import Button from '../components/Button'
 import styled from 'styled-components'
 
 const FormContainer = styled.div`
-  width: 800px;
+  width: 100%;
   max-width: 90%;
   display: flex;
   flex-direction: column;
