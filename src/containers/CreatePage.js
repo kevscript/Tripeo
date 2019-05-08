@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import TripForm from '../components/TripForm'
+import Button from '../components/Button'
 import LocationCard from '../components/LocationCard'
 
 const Container = styled.div`
@@ -28,23 +29,15 @@ const TripNameInput = styled.input`
 `
 
 const CheckpointsList = styled.ul`
+  width: 90%;
   list-style: none;
   margin: 0 auto;
 `
 
-const CreatePage = ({ trip, startDate, endDate, handleStartDateChange, handleEndDateChange, handleLocation, handleFormSubmit }) => {
+const CreatePage = ({ location, trip, startDate, endDate, handleStartDateChange, handleEndDateChange, handleLocation, handleFormSubmit }) => {
   return (
     <Container>
       <TripNameInput type="text" placeholder="Trip Name" />
-      <TripForm
-        startDate={startDate}
-        endDate={endDate}
-        handleStartDateChange={handleStartDateChange}
-        handleEndDateChange={handleEndDateChange}
-        handleLocation={handleLocation}
-        handleFormSubmit={handleFormSubmit}
-      />
-
       {trip.length > 0 &&
         <CheckpointsList>
           {trip.map((checkpoint, i) => {
@@ -52,7 +45,18 @@ const CreatePage = ({ trip, startDate, endDate, handleStartDateChange, handleEnd
           })}
         </CheckpointsList>
       }
-
+      {trip.length > 0 &&
+        <Button big>Weather It</Button>
+      }
+      <TripForm
+        location={location}
+        startDate={startDate}
+        endDate={endDate}
+        handleStartDateChange={handleStartDateChange}
+        handleEndDateChange={handleEndDateChange}
+        handleLocation={handleLocation}
+        handleFormSubmit={handleFormSubmit}
+      />
     </Container>
   )
 }

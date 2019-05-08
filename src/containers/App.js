@@ -24,14 +24,16 @@ const App = () => {
   }
 
   const handleFormSubmit = () => {
-    setTrip([...trip, {
-      location, 
-      from: startDate, 
-      to: endDate
-    }])
-    setLocation('')
-    setStartDate('')
-    setEndDate('')
+    if (location && startDate && endDate) {
+      setTrip([...trip, {
+        location, 
+        from: startDate, 
+        to: endDate
+      }])
+      setLocation('')
+      setStartDate('')
+      setEndDate('')
+    }
   }
 
   return (
@@ -49,6 +51,7 @@ const App = () => {
         <Route path='/create'
           render={() => (
             <CreatePage
+              location={location}
               trip={trip}
               startDate={startDate}
               endDate={endDate}

@@ -1,6 +1,5 @@
 import React from 'react'
 import AlgoliaPlaces from 'algolia-places-react'
-import styled from 'styled-components'
 import '../styles/algoliaplaces.css'
 
 const PlacesInput = ({ handleLocation }) => {
@@ -18,7 +17,7 @@ const PlacesInput = ({ handleLocation }) => {
 
       onSuggestions={({ rawAnswer, query, suggestions }) =>
         console.log('Fired when dropdown receives suggestions. You will receive the array of suggestions that are displayed.')}
-
+        
       onCursorChanged={({ rawAnswer, query, suggestion, suggestonIndex }) =>
         console.log('Fired when arrows keys are used to navigate suggestions.')}
 
