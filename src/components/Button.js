@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 const ButtonContainer = styled.div`
   cursor: pointer;
-  margin: ${props => props.big ? '2rem 0' : '1rem 0'};
-  padding: ${props => props.big ? '15px 45px' : '5px 15px'};
-  font-size: ${props => props.big ? '2.6rem' : '1.6rem'};
+  margin: ${props => props.big ? '20px 0' : '10px 0'};
+  padding: ${props => props.big ? '15px 45px' : '10px 20px'};
+  font-size: ${props => props.big ? '26px' : '16px'};
   border-radius: 50px;
   background: lightcoral;
   color: papayawhip;
@@ -13,9 +13,9 @@ const ButtonContainer = styled.div`
 
 ButtonContainer.displayName = 'ButtonContainer'
 
-const Button = ({ children, big, ...props }) => {
+const Button = ({ children, big, handleFormSubmit, ...props }) => {
   return (
-    <ButtonContainer big={big}>
+    <ButtonContainer big={big} onClick={handleFormSubmit}>
       {children}
     </ButtonContainer>
   )

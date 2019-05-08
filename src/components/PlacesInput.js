@@ -1,14 +1,11 @@
 import React from 'react'
 import AlgoliaPlaces from 'algolia-places-react'
 import styled from 'styled-components'
+import '../styles/algoliaplaces.css'
 
-const StyledPlaces = styled(AlgoliaPlaces)`
-  width: 400px;
-`
-
-const PlacesInput = () => {
+const PlacesInput = ({ handleLocation }) => {
   return (
-    <StyledPlaces
+    <AlgoliaPlaces
       placeholder='Location'
 
       options={{
@@ -17,8 +14,7 @@ const PlacesInput = () => {
         // Other options from https://community.algolia.com/places/documentation.html#options
       }}
 
-      onChange={({ query, rawAnswer, suggestion, suggestionIndex }) =>
-        console.log('Fired when suggestion selected in the dropdown or hint was validated.')}
+      onChange={handleLocation}
 
       onSuggestions={({ rawAnswer, query, suggestions }) =>
         console.log('Fired when dropdown receives suggestions. You will receive the array of suggestions that are displayed.')}

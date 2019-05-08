@@ -6,8 +6,10 @@ import CreatePage from './CreatePage'
 
 const App = () => {
 
+  const [location, setLocation] = useState('')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
+  const [trip, setTrip] = useState([])
 
   const handleStartDateChange = (date) => {
     setStartDate(date)
@@ -15,6 +17,21 @@ const App = () => {
 
   const handleEndDateChange = (date) => {
     setEndDate(date)
+  }
+
+  const handleLocation = (e) => {
+    setLocation({name: e.suggestion.value, coord: e.suggestion.latlng})
+  }
+
+  const handleFormSubmit = () => {
+    setTrip([...trip, {
+      location, 
+      from: startDate, 
+      to: endDate
+    }])
+    setLocation('')
+    setStartDate('')
+    setEndDate('')
   }
 
   return (
@@ -32,10 +49,13 @@ const App = () => {
         <Route path='/create'
           render={() => (
             <CreatePage
+              trip={trip}
               startDate={startDate}
               endDate={endDate}
               handleStartDateChange={handleStartDateChange}
               handleEndDateChange={handleEndDateChange}
+              handleLocation={handleLocation}
+              handleFormSubmit={handleFormSubmit}
             />
           )}
         />

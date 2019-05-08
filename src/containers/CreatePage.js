@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import Button from '../components/Button'
 import TripForm from '../components/TripForm'
 
 const Container = styled.div`
@@ -26,18 +25,27 @@ const TripNameInput = styled.input`
   }
 `
 
-const LocationList = styled.ul``
-
-const CreatePage = ({startDate, endDate, handleStartDateChange, handleEndDateChange}) => {
+const CreatePage = ({ trip, startDate, endDate, handleStartDateChange, handleEndDateChange, handleLocation, handleFormSubmit }) => {
   return (
     <Container>
       <TripNameInput type="text" placeholder="Trip Name" />
-      <TripForm 
-        startDate={startDate} 
-        endDate={endDate} 
+      <TripForm
+        startDate={startDate}
+        endDate={endDate}
         handleStartDateChange={handleStartDateChange}
         handleEndDateChange={handleEndDateChange}
+        handleLocation={handleLocation}
+        handleFormSubmit={handleFormSubmit}
       />
+
+      {trip.length > 0 &&
+        <ul>
+          {trip.map((check, i) => {
+            return <li key={i}>{check.location.name} from {check.from.toUTCString()} to {check.to.toUTCString()}</li>
+          })}
+        </ul>
+      }
+
     </Container>
   )
 }
