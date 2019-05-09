@@ -34,7 +34,7 @@ const ButtonContainer = styled.div`
   align-items: center;
 `
 
-const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate ,location, startDate, endDate, handleFormSubmit }) => {
+const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, handleFormSubmit }) => {
 
   const handleStartDateChange = (date) => {
     changeStartDate(date)
@@ -65,7 +65,7 @@ const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate ,locati
           handleDateChange={handleEndDateChange}
         />
       </InputsContainer>
-      {location && startDate && endDate 
+      {form.location && form.from && form.to 
           ? <ButtonContainer>
               <Button handleFormSubmit={handleFormSubmit}>Add Checkpoint</Button>
             </ButtonContainer>
