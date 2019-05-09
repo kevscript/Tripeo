@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import TripForm from '../components/TripForm'
 import Button from '../components/Button'
 import LocationCard from '../components/LocationCard'
+import { connect } from 'react-redux'
+import { changeTripName } from '../actions'
 
 const Container = styled.div`
   width: 100%;
@@ -35,31 +37,41 @@ const CheckpointsList = styled.ul`
   margin: 0 auto;
 `
 
-const CreatePage = ({ tripNameRef, location, trip, startDate, endDate, handleStartDateChange, handleEndDateChange, handleLocation, handleFormSubmit }) => {
+const CreatePage = ({ trip, changeTripName }) => {
+
+  const handleTripName = (e) => {
+    changeTripName(e.target.value)
+  }
+
   return (
     <Container>
-      <TripNameInput ref={tripNameRef} type="text" placeholder="Trip Name" />
-      {trip.length > 0 &&
+      <TripNameInput
+        onChange={handleTripName}
+        type="text"
+        placeholder="Trip Name"
+        value={trip.name}
+      />
+      {trip.checkpoints.length > 0 &&
         <CheckpointsList>
-          {trip.map((checkpoint, i) => {
+          {trip.checkpoints.map((checkpoint, i) => {
             return <LocationCard key={i} checkpoint={checkpoint} />
           })}
         </CheckpointsList>
       }
-      {trip.length > 0 &&
+      {trip.checkpoints.length > 0 &&
         <Button big>Weather It</Button>
       }
-      <TripForm
-        location={location}
-        startDate={startDate}
-        endDate={endDate}
-        handleStartDateChange={handleStartDateChange}
-        handleEndDateChange={handleEndDateChange}
-        handleLocation={handleLocation}
-        handleFormSubmit={handleFormSubmit}
-      />
+      <TripForm />
     </Container>
   )
 }
 
-export default CreatePage
+const mapStateToProps = (state) => ({
+  trip: state.trip
+})
+
+const mapDispatchToProps = {
+  changeTripName
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePage)

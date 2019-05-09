@@ -1,14 +1,11 @@
 import {
-  CHANGE_TRIP_NAME,
   CHANGE_LOCATION,
   CHANGE_START_DATE,
-  CHANGE_END_DATE
+  CHANGE_END_DATE,
+  CHANGE_TRIP_NAME,
+  ADD_NEW_CHECKPOINT,
+  RESET_FORM
 } from './types'
-
-export const changeTripName = (name) => ({
-  type: CHANGE_TRIP_NAME,
-  payload: name
-})
 
 export const changeLocation = (location) => ({
   type: CHANGE_LOCATION,
@@ -23,4 +20,29 @@ export const changeStartDate = (date) => ({
 export const changeEndDate = (date) => ({
   type: CHANGE_END_DATE,
   payload: date
+})
+
+
+
+export const addNewCheckpoint = () =>
+  (dispatch, getState) => {
+    const location = getState().form.location
+    const from = getState().form.from.toUTCString()
+    const to = getState().form.to.toUTCString()
+
+    dispatch({
+      type: ADD_NEW_CHECKPOINT,
+      payload: {
+        location: { ...location },
+        fromDate: from,
+        toDate: to
+      }
+    })
+
+    dispatch({ type: RESET_FORM })
+  }
+
+export const changeTripName = (name) => ({
+  type: CHANGE_TRIP_NAME,
+  payload: name
 })

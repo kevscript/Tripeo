@@ -1,12 +1,22 @@
 import {
   CHANGE_LOCATION,
   CHANGE_START_DATE,
-  CHANGE_END_DATE
+  CHANGE_END_DATE,
+  RESET_FORM
 } from '../actions/types'
 
-export default (state = {}, action) => {
+const initialState = {
+  location: {},
+  from: '',
+  to: ''
+}
+
+export default (state = initialState, action) => {
 
   switch (action.type) {
+
+    case RESET_FORM:
+      return initialState
 
     case CHANGE_LOCATION:
       return {

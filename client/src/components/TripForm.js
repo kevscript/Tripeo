@@ -4,7 +4,12 @@ import DateInput from './DateInput'
 import Button from '../components/Button'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { changeLocation, changeStartDate, changeEndDate } from '../actions'
+import { 
+  changeLocation, 
+  changeStartDate, 
+  changeEndDate,
+  addNewCheckpoint
+ } from '../actions'
 
 const FormContainer = styled.div`
   padding-top: 30px;
@@ -34,7 +39,7 @@ const ButtonContainer = styled.div`
   align-items: center;
 `
 
-const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, handleFormSubmit }) => {
+const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, addNewCheckpoint }) => {
 
   const handleStartDateChange = (date) => {
     changeStartDate(date)
@@ -46,6 +51,10 @@ const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, handle
 
   const handleLocation = (location) => {
     changeLocation({...location.suggestion})
+  }
+
+  const handleFormSubmit = () => {
+    addNewCheckpoint()
   }
 
   return (
@@ -84,7 +93,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   changeLocation,
   changeStartDate,
-  changeEndDate
+  changeEndDate,
+  addNewCheckpoint
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TripForm)
