@@ -5,7 +5,7 @@ import '../styles/algoliaplaces.css'
 const PlacesInput = ({ handleLocation }) => {
   return (
     <AlgoliaPlaces
-      placeholder='Location'
+      placeholder='Location (city, address)'
 
       options={{
         appId: process.env.REACT_APP_ALGOLIA_APP_ID,
