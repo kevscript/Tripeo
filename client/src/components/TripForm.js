@@ -4,12 +4,14 @@ import DateInput from './DateInput'
 import Button from '../components/Button'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { 
-  changeLocation, 
-  changeStartDate, 
+import {
+  changeLocation,
+  changeStartDate,
+  changeStartMinDate,
+  changeEndMinDate,
   changeEndDate,
   addNewCheckpoint
- } from '../actions'
+} from '../actions'
 
 const FormContainer = styled.div`
   padding-top: 30px;
@@ -25,11 +27,12 @@ const FormContainer = styled.div`
 `
 
 const InputsContainer = styled.div`
-  width: 400px;
+  min-width: 400px;
   margin: 15px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: column;
 `
 
 const ButtonContainer = styled.div`
@@ -39,10 +42,11 @@ const ButtonContainer = styled.div`
   align-items: center;
 `
 
-const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, addNewCheckpoint }) => {
+const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, changeStartMinDate, changeEndMinDate, addNewCheckpoint }) => {
 
   const handleStartDateChange = (date) => {
     changeStartDate(date)
+    changeEndMinDate(date)
   }
 
   const handleEndDateChange = (date) => {
@@ -50,10 +54,11 @@ const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, addNew
   }
 
   const handleLocation = (location) => {
-    changeLocation({...location.suggestion})
+    changeLocation({ ...location.suggestion })
   }
 
   const handleFormSubmit = () => {
+    changeStartMinDate(form.to)
     addNewCheckpoint()
   }
 
@@ -67,20 +72,22 @@ const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, addNew
           placeholderText="From"
           selectedDate={form.from}
           handleDateChange={handleStartDateChange}
+          minDate={form.startMin}
         />
         <DateInput
           placeholderText="To"
           selectedDate={form.to}
           handleDateChange={handleEndDateChange}
+          minDate={form.endMin}
         />
       </InputsContainer>
-      {form.location && form.from && form.to 
-          ? <ButtonContainer>
-              <Button handleFormSubmit={handleFormSubmit}>Add Checkpoint</Button>
-            </ButtonContainer>
-          : <ButtonContainer>
-              <Button disabled>Add Checkpoint</Button>
-            </ButtonContainer>
+      {form.location && form.from && form.to
+        ? <ButtonContainer>
+          <Button handleFormSubmit={handleFormSubmit}>Add Checkpoint</Button>
+        </ButtonContainer>
+        : <ButtonContainer>
+          <Button disabled>Add Checkpoint</Button>
+        </ButtonContainer>
       }
     </FormContainer>
   )
@@ -93,6 +100,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   changeLocation,
   changeStartDate,
+  changeEndMinDate,
+  changeStartMinDate,
   changeEndDate,
   addNewCheckpoint
 }

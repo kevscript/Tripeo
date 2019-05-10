@@ -1,7 +1,9 @@
 import {
   CHANGE_LOCATION,
   CHANGE_START_DATE,
+  CHANGE_START_MINDATE,
   CHANGE_END_DATE,
+  CHANGE_END_MINDATE,
   CHANGE_TRIP_NAME,
   ADD_NEW_CHECKPOINT,
   RESET_FORM
@@ -22,6 +24,15 @@ export const changeEndDate = (date) => ({
   payload: date
 })
 
+export const changeStartMinDate = (date) => ({
+  type: CHANGE_START_MINDATE,
+  payload: date
+})
+
+export const changeEndMinDate = (date) => ({
+  type: CHANGE_END_MINDATE,
+  payload: date
+})
 
 
 export const addNewCheckpoint = () =>
@@ -39,7 +50,10 @@ export const addNewCheckpoint = () =>
       }
     })
 
-    dispatch({ type: RESET_FORM })
+    dispatch({
+      type: RESET_FORM,
+      payload: getState().form.to
+    })
   }
 
 export const changeTripName = (name) => ({
