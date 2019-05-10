@@ -15,14 +15,14 @@ const StyledDateInput = styled(DatePicker)`
 const DateInput = ({ selectedDate, handleDateChange, placeholderText, minDate }) => {
   return (
     <StyledDateInput
-      showTimeSelect
+      //showTimeSelect
       placeholderText={placeholderText}
       selected={selectedDate}
       onChange={handleDateChange}
-      timeFormat="HH:mm"
-      timeIntervals={60}
-      dateFormat="d MMMM yyyy - HH:mm"
-      timeCaption="time"
+      //timeFormat="HH:mm"
+      //timeIntervals={60}
+      //dateFormat="d MMMM yyyy"
+      //timeCaption="time"
       minDate={minDate}
     />
   )

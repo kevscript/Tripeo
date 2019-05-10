@@ -69,13 +69,13 @@ const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, change
       </InputsContainer>
       <InputsContainer>
         <DateInput
-          placeholderText="From"
+          placeholderText="From (included)"
           selectedDate={form.from}
           handleDateChange={handleStartDateChange}
           minDate={form.startMin}
         />
         <DateInput
-          placeholderText="To"
+          placeholderText="To (not included)"
           selectedDate={form.to}
           handleDateChange={handleEndDateChange}
           minDate={form.endMin}
