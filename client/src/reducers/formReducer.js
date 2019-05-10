@@ -8,7 +8,7 @@ import {
 } from '../actions/types'
 
 const initialState = {
-  location: {},
+  location: '',
   from: '',
   startMin: new Date(),
   to: '',
@@ -19,6 +19,8 @@ export default (state = initialState, action) => {
 
   switch (action.type) {
 
+    /*reset form and setting the minimum date of the start date input
+    to the end date of the last checkpoint to avoid overlapping dates between checkpoints*/
     case RESET_FORM:
       return {
         ...initialState,

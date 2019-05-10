@@ -50,6 +50,7 @@ export const addNewCheckpoint = () =>
       }
     })
 
+    /*reset form and passing the end date of the last checkpoint to avoid overlapping dates between checkpoints*/
     dispatch({
       type: RESET_FORM,
       payload: getState().form.to
