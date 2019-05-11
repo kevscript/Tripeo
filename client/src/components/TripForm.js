@@ -1,6 +1,7 @@
 import React from 'react'
 import PlacesInput from './PlacesInput'
 import DateInput from './DateInput'
+import DateRange from './DateRange'
 import Button from '../components/Button'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
@@ -68,17 +69,13 @@ const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, change
         <PlacesInput handleLocation={handleLocation} />
       </InputsContainer>
       <InputsContainer>
-        <DateInput
-          placeholderText="From (included)"
-          selectedDate={form.from}
-          handleDateChange={handleStartDateChange}
-          minDate={form.startMin}
-        />
-        <DateInput
-          placeholderText="To (not included)"
-          selectedDate={form.to}
-          handleDateChange={handleEndDateChange}
-          minDate={form.endMin}
+        <DateRange 
+          handleStartDateChange={handleStartDateChange}
+          startDate={form.from}
+          startMin={form.startMin}
+          handleEndDateChange={handleEndDateChange}
+          endDate={form.to}
+          endMin={form.endMin}
         />
       </InputsContainer>
       {form.location && form.from && form.to

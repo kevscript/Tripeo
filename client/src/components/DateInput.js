@@ -21,7 +21,7 @@ const DateInput = ({ selectedDate, handleDateChange, placeholderText, minDate })
       onChange={handleDateChange}
       //timeFormat="HH:mm"
       //timeIntervals={60}
-      //dateFormat="d MMMM yyyy"
+      dateFormat="dd / MM / yyyy"
       //timeCaption="time"
       minDate={minDate}
     />
