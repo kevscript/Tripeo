@@ -16,11 +16,14 @@ const LocationDate = styled.span``
 
 
 const LocationCard = ({ checkpoint }) => {
+
+  const { location, startDate, endDate } = checkpoint
+
   return (
     <CardContainer>
-      <LocationName>{checkpoint.location.name}</LocationName>
-      <LocationDate>from {checkpoint.startDate}</LocationDate>
-      <LocationDate>to {checkpoint.endDate}</LocationDate>
+      <LocationName>{location.name}</LocationName>
+      <LocationDate>from {new Date(startDate).toLocaleDateString()}</LocationDate>
+      <LocationDate>to {new Date(endDate).toLocaleDateString()}</LocationDate>
     </CardContainer>
   )
 }

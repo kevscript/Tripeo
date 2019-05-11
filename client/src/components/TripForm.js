@@ -1,6 +1,5 @@
 import React from 'react'
 import PlacesInput from './PlacesInput'
-import DateInput from './DateInput'
 import DateRange from './DateRange'
 import Button from '../components/Button'
 import styled from 'styled-components'
