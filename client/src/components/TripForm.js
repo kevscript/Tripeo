@@ -45,6 +45,8 @@ const ButtonContainer = styled.div`
 
 const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, changeStartMinDate, changeEndMinDate, addNewCheckpoint }) => {
 
+  const { start, startMin, end, endMin, location } = form
+
   const handleStartDateChange = (date) => {
     changeStartDate(date)
     changeEndMinDate(date)
@@ -59,7 +61,7 @@ const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, change
   }
 
   const handleFormSubmit = () => {
-    changeStartMinDate(form.to)
+    changeStartMinDate(end)
     addNewCheckpoint()
   }
 
@@ -69,16 +71,16 @@ const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, change
         <PlacesInput handleLocation={handleLocation} />
       </InputsContainer>
       <InputsContainer>
-        <DateRange 
+        <DateRange
           handleStartDateChange={handleStartDateChange}
-          startDate={form.from}
-          startMin={form.startMin}
+          startDate={start}
+          startMin={startMin}
           handleEndDateChange={handleEndDateChange}
-          endDate={form.to}
-          endMin={form.endMin}
+          endDate={end}
+          endMin={endMin}
         />
       </InputsContainer>
-      {form.location && form.from && form.to
+      {location && start && end
         ? <ButtonContainer>
           <Button handleFormSubmit={handleFormSubmit}>Add Checkpoint</Button>
         </ButtonContainer>

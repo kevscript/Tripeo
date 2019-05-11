@@ -38,22 +38,22 @@ export const changeEndMinDate = (date) => ({
 export const addNewCheckpoint = () =>
   (dispatch, getState) => {
     const location = getState().form.location
-    const from = getState().form.from.toUTCString()
-    const to = getState().form.to.toUTCString()
+    const start = getState().form.start.toUTCString()
+    const end = getState().form.end.toUTCString()
 
     dispatch({
       type: ADD_NEW_CHECKPOINT,
       payload: {
         location: { ...location },
-        fromDate: from,
-        toDate: to
+        startDate: start,
+        endDate: end
       }
     })
 
     /*reset form and passing the end date of the last checkpoint to avoid overlapping dates between checkpoints*/
     dispatch({
       type: RESET_FORM,
-      payload: getState().form.to
+      payload: getState().form.end
     })
   }
 

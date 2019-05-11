@@ -19,8 +19,8 @@ const LocationCard = ({ checkpoint }) => {
   return (
     <CardContainer>
       <LocationName>{checkpoint.location.name}</LocationName>
-      <LocationDate>from {checkpoint.fromDate}</LocationDate>
-      <LocationDate>to {checkpoint.toDate}</LocationDate>
+      <LocationDate>from {checkpoint.startDate}</LocationDate>
+      <LocationDate>to {checkpoint.endDate}</LocationDate>
     </CardContainer>
   )
 }

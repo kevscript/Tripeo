@@ -9,9 +9,9 @@ import {
 
 const initialState = {
   location: '',
-  from: '',
+  start: '',
   startMin: new Date(),
-  to: '',
+  end: '',
   endMin: new Date()
 }
 
@@ -36,13 +36,13 @@ export default (state = initialState, action) => {
     case CHANGE_START_DATE:
       return {
         ...state,
-        from: action.payload
+        start: action.payload
       }
 
     case CHANGE_END_DATE:
       return {
         ...state,
-        to: action.payload
+        end: action.payload
       }
 
     case CHANGE_START_MINDATE:

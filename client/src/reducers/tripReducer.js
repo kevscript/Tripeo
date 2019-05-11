@@ -25,8 +25,8 @@ export default (state = initialState, action) => {
           ...state.checkpoints,
           {
             location: { ...action.payload.location },
-            fromDate: action.payload.fromDate,
-            toDate: action.payload.toDate
+            startDate: action.payload.startDate,
+            endDate: action.payload.endDate
           }
         ]
       }
