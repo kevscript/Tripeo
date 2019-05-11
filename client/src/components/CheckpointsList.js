@@ -3,10 +3,9 @@ import styled from 'styled-components'
 import LocationCard from './LocationCard'
 
 const ListContainer = styled.ul`
-  width: 90%;
-  max-width: 800px;
+  width: 100%;
   list-style: none;
-  margin: 0 auto;
+  margin: 0;
 `
 
 const CheckpointsList = ({ checkpoints }) => {

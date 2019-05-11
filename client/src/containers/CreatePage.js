@@ -30,7 +30,18 @@ const TripNameInput = styled.input`
   }
 `
 
+const CheckpointsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  max-width: 600px;
+`
+
 const CreatePage = ({ trip, changeTripName }) => {
+
+  const { name, checkpoints } = trip
 
   const handleTripName = (e) => {
     changeTripName(e.target.value)
@@ -42,13 +53,13 @@ const CreatePage = ({ trip, changeTripName }) => {
         onChange={handleTripName}
         type="text"
         placeholder="Trip Name"
-        value={trip.name}
+        value={name}
       />
-      {trip.checkpoints.length > 0 &&
-        <CheckpointsList checkpoints={trip.checkpoints} />
-      }
-      {trip.checkpoints.length > 0 &&
-        <Button big>Weather It</Button>
+      {checkpoints.length > 0 &&
+        <CheckpointsContainer>
+          <CheckpointsList checkpoints={checkpoints} />
+          <Button big>Weather It</Button>
+        </CheckpointsContainer>
       }
       <TripForm />
     </Container>

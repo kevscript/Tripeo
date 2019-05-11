@@ -16,7 +16,6 @@ import {
 const FormContainer = styled.div`
   padding-top: 30px;
   margin: 30px 0;
-  width: 100%;
   width: 95%;
   max-width: 600px;
   display: flex;
