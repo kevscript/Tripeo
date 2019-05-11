@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import TripForm from '../components/TripForm'
 import Button from '../components/Button'
-import LocationCard from '../components/LocationCard'
+import CheckpointsList from '../components/CheckpointsList'
 import { connect } from 'react-redux'
 import { changeTripName } from '../actions'
 
@@ -30,13 +30,6 @@ const TripNameInput = styled.input`
   }
 `
 
-const CheckpointsList = styled.ul`
-  width: 90%;
-  max-width: 800px;
-  list-style: none;
-  margin: 0 auto;
-`
-
 const CreatePage = ({ trip, changeTripName }) => {
 
   const handleTripName = (e) => {
@@ -52,11 +45,7 @@ const CreatePage = ({ trip, changeTripName }) => {
         value={trip.name}
       />
       {trip.checkpoints.length > 0 &&
-        <CheckpointsList>
-          {trip.checkpoints.map((checkpoint, i) => {
-            return <LocationCard key={i} checkpoint={checkpoint} />
-          })}
-        </CheckpointsList>
+        <CheckpointsList checkpoints={trip.checkpoints} />
       }
       {trip.checkpoints.length > 0 &&
         <Button big>Weather It</Button>
