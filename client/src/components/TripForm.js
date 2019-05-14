@@ -84,7 +84,7 @@ const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, change
       </InputsContainer>
       {location && start && end
         ? <ButtonContainer>
-          <Button handleFormSubmit={handleFormSubmit}>Add Checkpoint</Button>
+          <Button handleClick={handleFormSubmit}>Add Checkpoint</Button>
         </ButtonContainer>
         : <ButtonContainer>
           <Button disabled>Add Checkpoint</Button>

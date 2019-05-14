@@ -20,9 +20,9 @@ const ButtonContainer = styled.button`
 
 ButtonContainer.displayName = 'ButtonContainer'
 
-const Button = ({ children, big, handleFormSubmit, disabled }) => {
+const Button = ({ children, big, handleClick, disabled }) => {
   return (
-    <ButtonContainer big={big} disabled={disabled} onClick={handleFormSubmit}>
+    <ButtonContainer big={big} disabled={disabled} onClick={handleClick}>
       {children}
     </ButtonContainer>
   )
