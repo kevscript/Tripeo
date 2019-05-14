@@ -15,7 +15,7 @@ const LocationName = styled.h3``
 const LocationDate = styled.span``
 
 
-const LocationCard = ({ checkpoint }) => {
+const CheckpointCard = ({ checkpoint }) => {
 
   const { location, startDate, endDate } = checkpoint
 
@@ -28,4 +28,4 @@ const LocationCard = ({ checkpoint }) => {
   )
 }
 
-export default LocationCard
+export default CheckpointCard
