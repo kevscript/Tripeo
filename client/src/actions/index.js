@@ -6,7 +6,8 @@ import {
   CHANGE_END_MINDATE,
   CHANGE_TRIP_NAME,
   ADD_NEW_CHECKPOINT,
-  RESET_FORM
+  RESET_FORM,
+  CREATE_ROADMAP
 } from './types'
 
 export const changeLocation = (location) => ({
@@ -38,8 +39,8 @@ export const changeEndMinDate = (date) => ({
 export const addNewCheckpoint = () =>
   (dispatch, getState) => {
     const location = getState().form.location
-    const start = getState().form.start.toUTCString()
-    const end = getState().form.end.toUTCString()
+    const start = getState().form.start
+    const end = getState().form.end
 
     dispatch({
       type: ADD_NEW_CHECKPOINT,
@@ -61,3 +62,44 @@ export const changeTripName = (name) => ({
   type: CHANGE_TRIP_NAME,
   payload: name
 })
+
+
+
+
+
+
+
+
+
+
+
+export const createRoadmap = () =>
+  (dispatch, getState) => {
+    const checkpoints = getState().trip.checkpoints
+    let roadmap = []
+
+    checkpoints.map(cp => {
+      let start = new Date(cp.startDate)
+      let end = new Date(cp.endDate)
+      let diff = Math.round(Math.abs((start.getTime() - end.getTime()) / 86400000))
+
+      let place = {
+        location: { ...cp.location },
+        timestamps: []
+      }
+
+      let startStamp = start.getTime()
+      for (let i = 0; i < diff; i++) {
+        place.timestamps.push(startStamp)
+        startStamp += 86400000
+      }
+
+      roadmap.push(place)
+
+    })
+
+    dispatch({
+      type: CREATE_ROADMAP,
+      payload: roadmap
+    })
+  }
