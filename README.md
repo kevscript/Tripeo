@@ -1,0 +1,1 @@
+React App to get weather forcasts for trips
