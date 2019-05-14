@@ -4,7 +4,7 @@ import TripForm from '../components/TripForm'
 import Button from '../components/Button'
 import CheckpointsList from '../components/CheckpointsList'
 import { connect } from 'react-redux'
-import { changeTripName } from '../actions'
+import { changeTripName, createRoadmap } from '../actions'
 
 const Container = styled.div`
   width: 100%;
@@ -39,12 +39,16 @@ const CheckpointsContainer = styled.div`
   max-width: 600px;
 `
 
-const CreatePage = ({ trip, changeTripName }) => {
+const CreatePage = ({ trip, changeTripName, createRoadmap }) => {
 
   const { name, checkpoints } = trip
 
   const handleTripName = (e) => {
     changeTripName(e.target.value)
+  }
+
+  const handleWeather = () => {
+    createRoadmap()
   }
 
   return (
@@ -58,7 +62,7 @@ const CreatePage = ({ trip, changeTripName }) => {
       {checkpoints.length > 0 &&
         <CheckpointsContainer>
           <CheckpointsList checkpoints={checkpoints} />
-          <Button big>Weather It</Button>
+          <Button big handleClick={handleWeather}>Weather It</Button>
         </CheckpointsContainer>
       }
       <TripForm />
@@ -71,7 +75,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  changeTripName
+  changeTripName,
+  createRoadmap
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePage)

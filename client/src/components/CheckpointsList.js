@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import LocationCard from './LocationCard'
+import CheckpointCard from './CheckpointCard'
 
 const ListContainer = styled.ul`
   width: 100%;
@@ -12,7 +12,7 @@ const CheckpointsList = ({ checkpoints }) => {
   return (
     <ListContainer>
       {checkpoints.map((checkpoint, i) => {
-        return <LocationCard key={i} checkpoint={checkpoint} />
+        return <CheckpointCard key={i} checkpoint={checkpoint} />
       })}
     </ListContainer>
   )
