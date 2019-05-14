@@ -61,12 +61,16 @@ const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, change
   const handleFormSubmit = () => {
     changeStartMinDate(end)
     addNewCheckpoint()
+    const input = document.querySelector('.ap-input')
+    input.value = ''
   }
 
   return (
     <FormContainer>
       <InputsContainer>
-        <PlacesInput handleLocation={handleLocation} />
+        <PlacesInput 
+          handleLocation={handleLocation}
+        />
       </InputsContainer>
       <InputsContainer>
         <DateRange
