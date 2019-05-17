@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import TripForm from '../components/TripForm'
 import Button from '../components/Button'
 import CheckpointsList from '../components/CheckpointsList'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { changeTripName, createRoadmap } from '../actions'
+import { changeTripName, createRoadmap, fetchWeather } from '../actions'
 
 const Container = styled.div`
   width: 100%;
@@ -39,7 +40,7 @@ const CheckpointsContainer = styled.div`
   max-width: 600px;
 `
 
-const CreatePage = ({ trip, changeTripName, createRoadmap }) => {
+const CreatePage = ({ trip, changeTripName, createRoadmap, fetchWeather }) => {
 
   const { name, checkpoints } = trip
 
@@ -49,6 +50,7 @@ const CreatePage = ({ trip, changeTripName, createRoadmap }) => {
 
   const handleWeather = () => {
     createRoadmap()
+    fetchWeather()
   }
 
   return (
@@ -62,7 +64,9 @@ const CreatePage = ({ trip, changeTripName, createRoadmap }) => {
       {checkpoints.length > 0 &&
         <CheckpointsContainer>
           <CheckpointsList checkpoints={checkpoints} />
-          <Button big handleClick={handleWeather}>Weather It</Button>
+          <Link to='/weather'>
+            <Button big handleClick={handleWeather}>Weather It</Button>
+          </Link>
         </CheckpointsContainer>
       }
       <TripForm />
@@ -71,12 +75,13 @@ const CreatePage = ({ trip, changeTripName, createRoadmap }) => {
 }
 
 const mapStateToProps = (state) => ({
-  trip: state.trip
+  trip: state.trip,
 })
 
 const mapDispatchToProps = {
   changeTripName,
-  createRoadmap
+  createRoadmap,
+  fetchWeather
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePage)
