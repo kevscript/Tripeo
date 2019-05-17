@@ -1,3 +1,4 @@
+import axios from 'axios'
 import {
   CHANGE_LOCATION,
   CHANGE_START_DATE,
@@ -7,8 +8,18 @@ import {
   CHANGE_TRIP_NAME,
   ADD_NEW_CHECKPOINT,
   RESET_FORM,
-  CREATE_ROADMAP
+  CREATE_ROADMAP,
+  FETCH_WEATHER_BEGIN,
+  FETCH_WEATHER_ERROR,
+  FETCH_WEATHER_SUCCESS
 } from './types'
+
+
+
+
+
+
+
 
 export const changeLocation = (location) => ({
   type: CHANGE_LOCATION,
@@ -34,6 +45,15 @@ export const changeEndMinDate = (date) => ({
   type: CHANGE_END_MINDATE,
   payload: date
 })
+
+
+
+
+
+
+
+
+
 
 
 export const addNewCheckpoint = () =>
@@ -73,29 +93,27 @@ export const changeTripName = (name) => ({
 
 
 
+
+
 export const createRoadmap = () =>
   (dispatch, getState) => {
     const checkpoints = getState().trip.checkpoints
     let roadmap = []
 
     checkpoints.map(cp => {
+      let location = cp.location
       let start = new Date(cp.startDate)
       let end = new Date(cp.endDate)
       let diff = Math.round(Math.abs((start.getTime() - end.getTime()) / 86400000))
 
-      let place = {
-        location: { ...cp.location },
-        timestamps: []
-      }
-
       let startStamp = start.getTime()
       for (let i = 0; i < diff; i++) {
-        place.timestamps.push(startStamp)
+        roadmap.push({
+          location: { ...location },
+          timestamp: startStamp
+        })
         startStamp += 86400000
       }
-
-      roadmap.push(place)
-
     })
 
     dispatch({
@@ -103,3 +121,46 @@ export const createRoadmap = () =>
       payload: roadmap
     })
   }
+
+
+// FETCH WEATHER
+
+export const fetchWeatherBegin = () => ({
+  type: FETCH_WEATHER_BEGIN
+})
+
+export const fetchWeatherSuccess = ([...data]) => ({
+  type: FETCH_WEATHER_SUCCESS,
+  payload: [...data]
+})
+
+export const fetchWeatherError = (error) => ({
+  type: FETCH_WEATHER_ERROR,
+  payload: error.message
+})
+
+export const fetchWeather = () => {
+  return (dispatch, getState) => {
+    dispatch(fetchWeatherBegin())
+
+    const roadmap = getState().weather.roadmap
+
+    // return a promise for every element in the array
+    const places = roadmap.map(place => {
+      const lat = place.location.latlng.lat
+      const lng = place.location.latlng.lng
+      const unixStamp = parseInt((new Date(place.timestamp) / 1000).toFixed(0))
+
+      return axios.get(`/api/${lat}/${lng}/${unixStamp}`)
+    })
+
+    // wait for all the promises to resolve
+    Promise.all([...places])
+      .then(([...placesRes]) => {
+        // isolate the data inside all the responses
+        let data = [...placesRes].map(res => res.data)
+        dispatch(fetchWeatherSuccess([...data]))
+      })
+      .catch(error => dispatch(fetchWeatherError(error)))
+  }
+}
