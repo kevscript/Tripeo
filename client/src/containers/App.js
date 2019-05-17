@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import GlobalStyle from '../styles/GlobalStyle'
 import WelcomePage from './WelcomPage'
 import CreatePage from './CreatePage'
+import WeatherPage from './WeatherPage'
 
 const App = () => {
 
@@ -21,6 +22,12 @@ const App = () => {
         <Route path='/create'
           render={() => (
             <CreatePage/>
+          )}
+        />
+
+        <Route path='/weather'
+          render={() => (
+            <WeatherPage/>
           )}
         />
 
