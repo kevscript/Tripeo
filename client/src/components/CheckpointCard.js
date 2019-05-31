@@ -3,7 +3,8 @@ import styled from 'styled-components'
 
 const CardContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  align-items: baseline;
+  justify-content: space-between;
   border: 1px solid rgba(0,0,0,0.3);
   width: 100%;
   margin: 15px 0;
@@ -22,8 +23,7 @@ const CheckpointCard = ({ checkpoint }) => {
   return (
     <CardContainer>
       <LocationName>{location.name}</LocationName>
-      <LocationDate>from {new Date(startDate).toLocaleDateString()}</LocationDate>
-      <LocationDate>to {new Date(endDate).toLocaleDateString()}</LocationDate>
+      <LocationDate>{startDate} > {endDate}</LocationDate>
     </CardContainer>
   )
 }

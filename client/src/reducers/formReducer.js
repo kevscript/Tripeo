@@ -11,8 +11,10 @@ const initialState = {
   location: '',
   start: '',
   startMin: new Date(),
+  startLocale: '',
   end: '',
-  endMin: new Date()
+  endMin: new Date(),
+  endLocale: ''
 }
 
 export default (state = initialState, action) => {
@@ -36,13 +38,15 @@ export default (state = initialState, action) => {
     case CHANGE_START_DATE:
       return {
         ...state,
-        start: action.payload
+        start: action.payload.date,
+        startLocale: action.payload.locale
       }
 
     case CHANGE_END_DATE:
       return {
         ...state,
-        end: action.payload
+        end: action.payload.date,
+        endLocale: action.payload.locale
       }
 
     case CHANGE_START_MINDATE:

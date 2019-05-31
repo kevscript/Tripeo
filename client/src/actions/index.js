@@ -26,14 +26,14 @@ export const changeLocation = (location) => ({
   payload: { ...location }
 })
 
-export const changeStartDate = (date) => ({
+export const changeStartDate = (date, locale) => ({
   type: CHANGE_START_DATE,
-  payload: date
+  payload: { date, locale }
 })
 
-export const changeEndDate = (date) => ({
+export const changeEndDate = (date, locale) => ({
   type: CHANGE_END_DATE,
-  payload: date
+  payload: { date, locale }
 })
 
 export const changeStartMinDate = (date) => ({
@@ -59,8 +59,8 @@ export const changeEndMinDate = (date) => ({
 export const addNewCheckpoint = () =>
   (dispatch, getState) => {
     const location = getState().form.location
-    const start = getState().form.start
-    const end = getState().form.end
+    const start = getState().form.startLocale
+    const end = getState().form.endLocale
 
     dispatch({
       type: ADD_NEW_CHECKPOINT,
@@ -88,9 +88,12 @@ export const changeTripName = (name) => ({
 
 
 
-
-
-
+// util function for roadmap creation, parsing locale date string to DarkSky format
+const parseLocaleDate = (date) => {
+  const dateArray = date.split('/')
+  const [ day, month, year ] = dateArray
+  return `${year}-${month}-${day}T00:00:00`
+}
 
 
 
@@ -101,18 +104,30 @@ export const createRoadmap = () =>
     let roadmap = []
 
     checkpoints.map(cp => {
-      let location = cp.location
-      let start = new Date(cp.startDate)
-      let end = new Date(cp.endDate)
-      let diff = Math.round(Math.abs((start.getTime() - end.getTime()) / 86400000))
+      const location = cp.location
+      const start = parseLocaleDate(cp.startDate)
+      const end = parseLocaleDate(cp.endDate)
+      const startTs = Date.parse(start)
+      const endTs = Date.parse(end)
 
-      let startStamp = start.getTime()
-      for (let i = 0; i < diff; i++) {
+      let diff
+      let forLoopStart
+      if (startTs === endTs) {
+        diff = 1
+        forLoopStart = 1
+      } else {
+        diff = Math.round(Math.abs((startTs - endTs) / 86400000))
+        forLoopStart = 0
+      }
+
+      let stamp = startTs
+      for (let i = forLoopStart; i <= diff; i++) {
         roadmap.push({
           location: { ...location },
-          timestamp: startStamp
+          timestamp: stamp,
+          date: parseLocaleDate(new Date(stamp).toLocaleDateString())
         })
-        startStamp += 86400000
+        stamp += 86400000
       }
     })
 
@@ -149,9 +164,10 @@ export const fetchWeather = () => {
     const places = roadmap.map(place => {
       const lat = place.location.latlng.lat
       const lng = place.location.latlng.lng
-      const unixStamp = parseInt((new Date(place.timestamp) / 1000).toFixed(0))
+      const date = place.date
+      // const unixStamp = parseInt((new Date(place.timestamp) / 1000).toFixed(0))
 
-      return axios.get(`/api/${lat}/${lng}/${unixStamp}`)
+      return axios.get(`/api/${lat}/${lng}/${date}`)
     })
 
     // wait for all the promises to resolve
