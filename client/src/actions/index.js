@@ -13,51 +13,62 @@ import {
   FETCH_WEATHER_ERROR,
   FETCH_WEATHER_SUCCESS
 } from './types'
+import parseLocaleDate from '../utils/parseLocaleDate'
 
 
 
 
 
-
-
-
+// receives location Object from Algolia Places Api selected by user
+// changes Location input of TripForm
 export const changeLocation = (location) => ({
   type: CHANGE_LOCATION,
   payload: { ...location }
 })
 
+// receives date Object from React-Datepicker 
+// and locale which is a string that's a formated version of date
+// changes the start date of TripForm
 export const changeStartDate = (date, locale) => ({
   type: CHANGE_START_DATE,
   payload: { date, locale }
 })
 
+// receives date Object from React-Datepicker 
+// and locale which is a string that's a formated version of date
+// changes the end date of TripForm
 export const changeEndDate = (date, locale) => ({
   type: CHANGE_END_DATE,
   payload: { date, locale }
 })
 
+// receives a date Object that changes the minimum date of the Date Picker
 export const changeStartMinDate = (date) => ({
   type: CHANGE_START_MINDATE,
   payload: date
 })
 
+// receives a date Object that changes the minimum date of the Date Picker
+// setted to the same as startMinDate so you can't pick a date before the start date
 export const changeEndMinDate = (date) => ({
   type: CHANGE_END_MINDATE,
   payload: date
+})
+
+// receives a string with trip name from Form
+export const changeTripName = (name) => ({
+  type: CHANGE_TRIP_NAME,
+  payload: name
 })
 
 
 
 
 
-
-
-
-
-
-
+// adds a checkpoint to the list
 export const addNewCheckpoint = () =>
   (dispatch, getState) => {
+    // gets location and date range of Form
     const location = getState().form.location
     const start = getState().form.startLocale
     const end = getState().form.endLocale
@@ -71,62 +82,54 @@ export const addNewCheckpoint = () =>
       }
     })
 
-    /*reset form and passing the end date of the last checkpoint to avoid overlapping dates between checkpoints*/
+    // reset form and passing the end date of the last checkpoint to avoid overlapping dates between checkpoints
     dispatch({
       type: RESET_FORM,
       payload: getState().form.end
     })
   }
 
-export const changeTripName = (name) => ({
-  type: CHANGE_TRIP_NAME,
-  payload: name
-})
-
-
-
-
-
-
-// util function for roadmap creation, parsing locale date string to DarkSky format
-const parseLocaleDate = (date) => {
-  const dateArray = date.split('/')
-  const [ day, month, year ] = dateArray
-  return `${year}-${month}-${day}T00:00:00`
-}
-
-
-
-
+// creates a day-by-day road map from all the checkpoints 
 export const createRoadmap = () =>
   (dispatch, getState) => {
+    // array of all checkpoints
     const checkpoints = getState().trip.checkpoints
     let roadmap = []
 
+    // for each checkpoint in array
     checkpoints.map(cp => {
       const location = cp.location
+      // parses dates to a string understandable by the darkSky Api
       const start = parseLocaleDate(cp.startDate)
       const end = parseLocaleDate(cp.endDate)
+      // creates timestamps from dates
       const startTs = Date.parse(start)
       const endTs = Date.parse(end)
 
-      let diff
+      // numberOfDays represents the number of days between start and end dates (acts as the condition of the forLoop and sets the iterative value)
+      let numberOfDays
+      // forLoopStart is an integer that represents the start of the loop (either 0 or 1)
       let forLoopStart
+      // if the start and end dates are the same (1 day checkpoint)
       if (startTs === endTs) {
-        diff = 1
+        // sets loop start and loop iteration limit to same value so it runs only once
+        numberOfDays = 1
         forLoopStart = 1
       } else {
-        diff = Math.round(Math.abs((startTs - endTs) / 86400000))
+        // 86400000 represents 1 day in timestamps units
+        numberOfDays = Math.round(Math.abs((startTs - endTs) / 86400000))
         forLoopStart = 0
       }
 
       let stamp = startTs
-      for (let i = forLoopStart; i <= diff; i++) {
+      // for each day of difference, push a checkpoint to the roadmap
+      for (let i = forLoopStart; i <= numberOfDays; i++) {
         roadmap.push({
           location: { ...location },
           timestamp: stamp,
           date: parseLocaleDate(new Date(stamp).toLocaleDateString())
         })
+        // adds 1 day to the timestamp for the next iteration (1 iteration / day)
         stamp += 86400000
       }
     })
@@ -138,12 +141,15 @@ export const createRoadmap = () =>
   }
 
 
-// FETCH WEATHER
 
+
+
+// FETCH WEATHER
 export const fetchWeatherBegin = () => ({
   type: FETCH_WEATHER_BEGIN
 })
 
+// receives an array of objects, trimmed weather data from darkSky Api
 export const fetchWeatherSuccess = ([...data]) => ({
   type: FETCH_WEATHER_SUCCESS,
   payload: [...data]
