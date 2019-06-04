@@ -21,8 +21,8 @@ export default (state = initialState, action) => {
 
   switch (action.type) {
 
-    /*reset form and setting the minimum date of the start date input
-    to the end date of the last checkpoint to avoid overlapping dates between checkpoints*/
+    // reset form and setting the minimum date of the start date input to the end date of the last checkpoint 
+    // to avoid overlapping dates between checkpoints
     case RESET_FORM:
       return {
         ...initialState,
