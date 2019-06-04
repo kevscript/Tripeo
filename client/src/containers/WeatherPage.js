@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
+import WeatherCard from '../components/WeatherCard'
+
 const Container = styled.div`
   width: 95%;
   max-width: 600px;
@@ -17,14 +19,6 @@ const CheckpointsList = styled.ul`
   justify-content: center;
   flex-direction: column;
 `
-
-const CheckpointItem = styled.li`
-  width: 100%;
-  border: 1px solid black;
-  padding: 30px;
-  margin: 15px 0;
-`
-
 const WeatherPage = ({ weather }) => {
 
   const { roadmap, forecasts } = weather
@@ -34,12 +28,7 @@ const WeatherPage = ({ weather }) => {
       <CheckpointsList>
         {roadmap.length === forecasts.length && roadmap.length > 0 && roadmap.map((cp, i) => {
           return (
-            <CheckpointItem key={cp.timestamp}>
-              <div>
-                <h3>{cp.location.name} - {new Date(cp.timestamp).toLocaleDateString()}</h3>
-                <h5>{forecasts[i].daily.data[0].summary}</h5>
-              </div>
-            </CheckpointItem>
+            <WeatherCard key={`cp-${cp.timestamp}`} cp={cp} forecast={forecasts[i]} />
           )
         })}
       </CheckpointsList>
