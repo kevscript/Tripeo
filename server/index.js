@@ -1,12 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const fetch = require('./fetch')
+const fetch = require('./fetch');
 
 // init server
 const app = express();
 app.use(cors());
-
 
 // default api route
 app.get('/api', (req, res) => {
@@ -15,19 +14,13 @@ app.get('/api', (req, res) => {
   })
 })
 
+// route for weather fetching
 app.get('/api/:lat/:lng/:time', (req, res) => {
   fetch.getWeather(req.params.lat, req.params.lng, req.params.time)
     .then(weather => {
       res.json(weather.data)
     })
 })
-
-
-
-
-
-
-
 
 // define port on which the back-end server runs
 const port = process.env.PORT || 5000;
