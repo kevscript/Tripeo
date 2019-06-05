@@ -9,8 +9,8 @@ const ButtonContainer = styled.button`
   padding: ${props => props.big ? '15px 45px' : '10px 20px'};
   font-size: ${props => props.big ? '26px' : '15px'};
   border-radius: 50px;
-  background: lightblue;
-  color: #fff;
+  background: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.text.light};
 
   &:disabled {
     cursor: not-allowed;

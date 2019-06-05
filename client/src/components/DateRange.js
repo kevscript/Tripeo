@@ -13,7 +13,7 @@ const RangeContainer = styled.div`
 const StyledDateInput = styled(DatePicker)`
   padding: 10px 15px;
   outline: 0;
-  border: 1px solid lightblue;
+  border: 1px solid lightgrey;
   border-radius: 3px;
   font-size: 15px;
   margin: 10px 0;
