@@ -12,13 +12,19 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers'
 
+// style setup
+import { ThemeProvider } from 'styled-components'
+import theme from './styles/theme'
+
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root')
 );
