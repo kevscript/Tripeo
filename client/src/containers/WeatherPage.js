@@ -6,7 +6,7 @@ import WeatherCard from '../components/WeatherCard'
 
 const Container = styled.div`
   width: 95%;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
