@@ -132,6 +132,8 @@ export const createRoadmap = () =>
         // adds 1 day to the timestamp for the next iteration (1 iteration / day)
         stamp += 86400000
       }
+
+      return null
     })
 
     dispatch({
