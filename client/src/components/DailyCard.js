@@ -6,13 +6,19 @@ const DailyItem = styled.div`
   cursor: pointer;
   position: relative;
   display: flex;
-  min-height: 114px;
+  height: 114px;
   flex-direction: row;
   align-items: center;
   width: 100%;
   background: ${props => props.theme.colors.primary};
   padding: 30px;
   color: #fff;
+  overflow-x: hidden;
+
+  @media (max-width: 540px) {
+    padding: 10px;
+    height: 60px;
+  }
 `
 
 const InfoContainer = styled.div`
@@ -20,13 +26,15 @@ const InfoContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  padding-right: 20px;
 `
 
 const DescContainer = styled.div`
-  padding: 0 50px;
+  padding: 0 20px 0 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-left: 1px solid #fff;
 `
 
 const Where = styled.span``
@@ -38,6 +46,14 @@ const When = styled.span`
 const Desc = styled.p`
   font-size: 20px;
   font-weight: 600;
+
+  @media (max-width: 800px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 540px) {
+    display: none;
+  }
 `
 
 const ArrowContainer = styled.div`
@@ -49,6 +65,10 @@ const ArrowContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 800px) {
+    width: 20px;
+  }
 `
 
 const Img = styled.img`

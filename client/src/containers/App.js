@@ -4,14 +4,13 @@ import GlobalStyle from '../styles/GlobalStyle'
 import WelcomePage from './WelcomPage'
 import CreatePage from './CreatePage'
 import WeatherPage from './WeatherPage'
-import Header from '../components/Header'
+//import Header from '../components/Header'
 
 const App = () => {
 
   return (
     <div>
       <GlobalStyle />
-      <Header />
       <Switch>
 
         <Route exact path="/"

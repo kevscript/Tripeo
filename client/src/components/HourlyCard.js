@@ -6,6 +6,8 @@ const CardContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  overflow-x: hidden;
 `
 
 const HourlyItem = styled.li`
@@ -27,6 +29,11 @@ const StatsContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `
 
 const StatsList = styled.ul`
@@ -59,15 +66,16 @@ const ItemValue = styled.p`
 const TempContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  min-width: 100px;
 `
 
 const IconContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
+  width: 30px;
   height: 100%;
   margin: 0 10px;
 `

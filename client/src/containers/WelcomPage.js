@@ -11,12 +11,21 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   background: #fff;
+
+  @media (max-width: 800px) {
+    width: 95%;
+    margin: 0 auto;
+  }
 `
 
 const Title = styled.h1`
   text-transform: uppercase;
   font-size: 4.2rem;
   letter-spacing: 0.1rem;
+
+  @media (max-width: 800px) {
+    font-size: 2.5rem;
+  }
 `
 
 const CreateLink = styled(Link)`
@@ -26,6 +35,11 @@ const CreateLink = styled(Link)`
 
 const Para = styled.p`
   font-size: 2.6rem;
+  text-align: center;
+
+  @media (max-width: 800px) {
+    font-size: 1.8rem;
+  }
 `
 
 const WelcomePage = () => {
@@ -34,11 +48,9 @@ const WelcomePage = () => {
 
       <Title>TripWeather</Title>
       <Para>Catch the weather before it catches you.</Para>
-      <Button big>
-        <CreateLink to="/create">
-          Get Started
-        </CreateLink>
-      </Button>
+      <CreateLink to="/create">
+        <Button big>Get Started</Button>
+      </CreateLink>
 
     </Container>
   )

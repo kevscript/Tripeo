@@ -2,6 +2,7 @@ import React from 'react'
 import AlgoliaPlaces from 'algolia-places-react'
 import '../styles/algoliaplaces.css'
 
+
 const PlacesInput = ({ handleLocation }) => {
   return (
     <AlgoliaPlaces

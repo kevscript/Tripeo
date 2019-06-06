@@ -4,7 +4,9 @@ import DailyCard from './DailyCard'
 import HourlyCard from './HourlyCard'
 
 const CardContainer = styled.div`
+  width: 100%;
   margin: 5px 0;
+  overflow-x: hidden;
 `
 
 const WeatherCard = ({ cp, forecast }) => {

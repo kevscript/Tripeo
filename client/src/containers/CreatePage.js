@@ -15,38 +15,39 @@ const Container = styled.div`
   background: #fff;
   display: flex;
   align-items: center;
-  padding: 5%;
+  justify-content: center;
 `
 
-const TripNameInput = styled.input`
+/*const TripNameInput = styled.input`
   background: 0;
   border: 0;
-  font-size: 4.2rem;
-  font-style: italic;
+  font-size: 2rem;
+  font-style: normal;
   text-align: center;
   outline: 0;
 
   &:focus {
-    font-style: normal;
+    font-style: italic;
   }
-`
+`*/
 
 const CheckpointsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 95%;
+  width: 90%;
+  margin: 0 auto;
   max-width: 600px;
 `
 
 const CreatePage = ({ trip, changeTripName, createRoadmap, fetchWeather }) => {
 
-  const { name, checkpoints } = trip
+  const { /*name,*/ checkpoints } = trip
 
-  const handleTripName = (e) => {
+ /*const handleTripName = (e) => {
     changeTripName(e.target.value)
-  }
+  }*/
 
   const handleWeather = () => {
     createRoadmap()
@@ -55,12 +56,12 @@ const CreatePage = ({ trip, changeTripName, createRoadmap, fetchWeather }) => {
 
   return (
     <Container>
-      <TripNameInput
+      {/*<TripNameInput
         onChange={handleTripName}
         type="text"
         placeholder="Trip Name"
         value={name}
-      />
+      />*/}
       {checkpoints.length > 0 &&
         <CheckpointsContainer>
           <CheckpointsList checkpoints={checkpoints} />
