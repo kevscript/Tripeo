@@ -1,6 +1,7 @@
 import {
   CHANGE_TRIP_NAME,
-  ADD_NEW_CHECKPOINT
+  ADD_NEW_CHECKPOINT,
+  RESET_ALL
 } from '../actions/types'
 
 const initialState = {
@@ -30,6 +31,9 @@ export default (state = initialState, action) => {
           }
         ]
       }
+
+    case RESET_ALL:
+      return initialState
 
     default:
       return state

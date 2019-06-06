@@ -11,12 +11,15 @@ import {
   CREATE_ROADMAP,
   FETCH_WEATHER_BEGIN,
   FETCH_WEATHER_ERROR,
-  FETCH_WEATHER_SUCCESS
+  FETCH_WEATHER_SUCCESS,
+  RESET_ALL
 } from './types'
 import parseLocaleDate from '../utils/parseLocaleDate'
 
 
-
+export const resetAll = () => ({
+  type: RESET_ALL
+})
 
 
 // receives location Object from Algolia Places Api selected by user

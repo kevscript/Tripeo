@@ -10,9 +10,11 @@ export const RESET_FORM = 'RESET_FORM'
 export const CHANGE_TRIP_NAME = 'CHANGE_TRIP_NAME'
 export const ADD_NEW_CHECKPOINT = 'ADD_NEW_CHECKPOINT'
 
-
 // types to handle weather
 export const CREATE_ROADMAP = 'CREATE_ROADMAP'
 export const FETCH_WEATHER_BEGIN = 'FETCH_WEATHER_BEGIN'
 export const FETCH_WEATHER_ERROR = 'FETCH_WEATHER_ERROR'
 export const FETCH_WEATHER_SUCCESS = 'FETCH_WEATHER_SUCCESS'
+
+// types to handle app
+export const RESET_ALL = 'RESET_ALL'

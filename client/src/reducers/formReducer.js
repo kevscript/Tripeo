@@ -4,7 +4,8 @@ import {
   CHANGE_START_MINDATE,
   CHANGE_END_DATE,
   CHANGE_END_MINDATE,
-  RESET_FORM
+  RESET_FORM,
+  RESET_ALL
 } from '../actions/types'
 
 const initialState = {
@@ -28,7 +29,7 @@ export default (state = initialState, action) => {
         ...initialState,
         startMin: action.payload
       }
-
+    
     case CHANGE_LOCATION:
       return {
         ...state,
@@ -60,6 +61,9 @@ export default (state = initialState, action) => {
         ...state,
         endMin: action.payload
       }
+
+    case RESET_ALL:
+      return initialState
 
     default:
       return state

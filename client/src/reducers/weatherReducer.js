@@ -2,7 +2,8 @@ import {
   CREATE_ROADMAP,
   FETCH_WEATHER_BEGIN,
   FETCH_WEATHER_ERROR,
-  FETCH_WEATHER_SUCCESS
+  FETCH_WEATHER_SUCCESS,
+  RESET_ALL
 } from '../actions/types'
 
 const initialState = {
@@ -38,6 +39,9 @@ export default (state = initialState, action) => {
         loading: false,
         error: action.payload
       }
+
+    case RESET_ALL:
+      return initialState
 
     default:
       return state
