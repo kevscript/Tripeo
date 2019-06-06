@@ -6,26 +6,24 @@ import Button from '../components/Button'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 100vh;
   background: #fff;
+`
 
-  @media (max-width: 800px) {
-    width: 95%;
-    margin: 0 auto;
-  }
+const ContentContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px 0;
 `
 
 const Title = styled.h1`
   text-transform: uppercase;
-  font-size: 4.2rem;
-  letter-spacing: 0.1rem;
-
-  @media (max-width: 800px) {
-    font-size: 2.5rem;
-  }
+  font-size: 30px;
 `
 
 const CreateLink = styled(Link)`
@@ -34,24 +32,22 @@ const CreateLink = styled(Link)`
 `
 
 const Para = styled.p`
-  font-size: 2.6rem;
+  font-size: 18px;
   text-align: center;
-
-  @media (max-width: 800px) {
-    font-size: 1.8rem;
-  }
 `
 
 const WelcomePage = () => {
   return (
     <Container>
-
-      <Title>TripWeather</Title>
-      <Para>Catch the weather before it catches you.</Para>
-      <CreateLink to="/create">
-        <Button big>Get Started</Button>
-      </CreateLink>
-
+      <ContentContainer>
+        <Title>TripWeather</Title>
+        <Para>Catch the weather before it catches you.</Para>
+      </ContentContainer>
+      <ContentContainer>
+        <CreateLink to="/create">
+          <Button big>Get Started</Button>
+        </CreateLink>
+      </ContentContainer>
     </Container>
   )
 }
