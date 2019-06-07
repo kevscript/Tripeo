@@ -1,57 +1,76 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import PlacesInput from './PlacesInput'
 import DateRange from './DateRange'
 import Button from '../components/Button'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import CloseBtn from '../assets/icons/delete-button.svg'
 import {
   changeLocation,
   changeStartDate,
   changeStartMinDate,
   changeEndMinDate,
   changeEndDate,
-  addNewCheckpoint
+  addNewCheckpoint,
+  openForm
 } from '../actions'
 
 const FormContainer = styled.div`
-  padding: 30px 0;
-  width: 600px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-
-  @media (max-width: 800px) {
-    width: 100%;
-    box-shadow: none;
-  }
+  width: 100%;
+  background: rgba(255,255,255,1);
 `
 
 const InputsContainer = styled.div`
-  margin: 15px 0;
+  margin: 0;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   flex-direction: column;
+`
 
-  @media (max-width: 800px) {
-    margin: 5px 0;
+const PlacesContainer = styled(InputsContainer)`
+  margin: 10px 0;
+  div {
+    width: 100%;
   }
 `
+
+const DateContainer = styled(InputsContainer)``
 
 const ButtonContainer = styled.div`
   margin: 25px 0;
   display: flex;
   justify-content: center;
-  align-items: center;
-
-  @media (max-width: 800px) {
-    margin: 0;
-  }
 `
 
-const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, changeStartMinDate, changeEndMinDate, addNewCheckpoint }) => {
+const CloseButton = styled.div`
+  cursor: pointer;
+  position: absolute;
+  top: 35px;
+  right: 40px;
+  width: 30px;
+  height: 30px;
+`
+
+const CloseImg = styled.img`
+  display: block;
+  width: 100%;
+  height: auto;
+`
+
+const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, changeStartMinDate, changeEndMinDate, addNewCheckpoint, openForm }) => {
 
   const { start, startMin, end, endMin, location } = form
 
@@ -77,14 +96,18 @@ const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, change
     input.value = ''
   }
 
-  return (
+  const handleFormClose = () => {
+    openForm()
+  }
+
+  return ReactDOM.createPortal(
     <FormContainer>
-      <InputsContainer>
+      <PlacesContainer>
         <PlacesInput
           handleLocation={handleLocation}
         />
-      </InputsContainer>
-      <InputsContainer>
+      </PlacesContainer>
+      <DateContainer>
         <DateRange
           handleStartDateChange={handleStartDateChange}
           startDate={start}
@@ -93,7 +116,7 @@ const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, change
           endDate={end}
           endMin={endMin}
         />
-      </InputsContainer>
+      </DateContainer>
       {location && start && end
         ? <ButtonContainer>
           <Button handleClick={handleFormSubmit}>Add Checkpoint</Button>
@@ -102,7 +125,11 @@ const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, change
           <Button disabled>Add Checkpoint</Button>
         </ButtonContainer>
       }
-    </FormContainer>
+      <CloseButton onClick={handleFormClose}>
+        <CloseImg src={CloseBtn} alt="close btn" />
+      </CloseButton>
+    </FormContainer>,
+    document.getElementById('portal-root')
   )
 }
 
@@ -116,7 +143,8 @@ const mapDispatchToProps = {
   changeEndMinDate,
   changeStartMinDate,
   changeEndDate,
-  addNewCheckpoint
+  addNewCheckpoint,
+  openForm
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TripForm)
