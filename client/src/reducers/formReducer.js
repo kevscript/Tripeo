@@ -5,10 +5,12 @@ import {
   CHANGE_END_DATE,
   CHANGE_END_MINDATE,
   RESET_FORM,
-  RESET_ALL
+  RESET_ALL,
+  OPEN_FORM
 } from '../actions/types'
 
 const initialState = {
+  opened: false,
   location: '',
   start: '',
   startMin: new Date(),
@@ -28,6 +30,12 @@ export default (state = initialState, action) => {
       return {
         ...initialState,
         startMin: action.payload
+      }
+    
+    case OPEN_FORM:
+      return {
+        ...state, 
+        opened: !state.opened
       }
     
     case CHANGE_LOCATION:

@@ -8,6 +8,7 @@ import {
   CHANGE_TRIP_NAME,
   ADD_NEW_CHECKPOINT,
   RESET_FORM,
+  OPEN_FORM,
   CREATE_ROADMAP,
   FETCH_WEATHER_BEGIN,
   FETCH_WEATHER_ERROR,
@@ -21,6 +22,11 @@ export const resetAll = () => ({
   type: RESET_ALL
 })
 
+
+// open form
+export const openForm = () => ({
+  type: OPEN_FORM
+})
 
 // receives location Object from Algolia Places Api selected by user
 // changes Location input of TripForm
@@ -63,7 +69,6 @@ export const changeTripName = (name) => ({
   type: CHANGE_TRIP_NAME,
   payload: name
 })
-
 
 
 
