@@ -5,17 +5,15 @@ import Button from '../components/Button'
 import CheckpointsList from '../components/CheckpointsList'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { changeTripName, createRoadmap, fetchWeather } from '../actions'
+import { createRoadmap, fetchWeather, openForm } from '../actions'
 
 const Container = styled.div`
   width: 100%;
   margin: 0 auto;
   flex-direction: column;
-  min-height: 100vh;
   background: #fff;
   display: flex;
   align-items: center;
-  justify-content: center;
 `
 
 /*const TripNameInput = styled.input`
@@ -36,32 +34,77 @@ const CheckpointsContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   max-width: 600px;
 `
 
-const CreatePage = ({ trip, changeTripName, createRoadmap, fetchWeather }) => {
+const Header = styled.div`
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+`
 
-  const { /*name,*/ checkpoints } = trip
+const HeaderTitle = styled.h3`
+  font-size: 20px;
+  font-weight: 600;
+`
 
- /*const handleTripName = (e) => {
-    changeTripName(e.target.value)
-  }*/
+const HeaderButton = styled.div`
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border: ${props => `1px solid ${props.theme.colors.primary}`};
+  border-radius: 50%;
+  cursor: pointer;
+
+  &::after {
+    display: block;
+    position: absolute;
+    content: '';
+    width: 25px;
+    height: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: ${props => props.theme.colors.primary};
+  }
+
+  &::before {
+    display: block;
+    position: absolute;
+    content: '';
+    width: 2px;
+    height: 25px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: ${props => props.theme.colors.primary};
+  }
+`
+
+const CreatePage = ({ trip, createRoadmap, fetchWeather, form, openForm }) => {
+  const { opened } = form
+  const { checkpoints } = trip
 
   const handleWeather = () => {
     createRoadmap()
     fetchWeather()
   }
 
+  const handleFormOpen = () => {
+    openForm()
+  }
+
   return (
     <Container>
-      {/*<TripNameInput
-        onChange={handleTripName}
-        type="text"
-        placeholder="Trip Name"
-        value={name}
-      />*/}
+      <Header>
+        <HeaderTitle>Roadmap</HeaderTitle>
+        <HeaderButton onClick={handleFormOpen} />
+      </Header>
       {checkpoints.length > 0 &&
         <CheckpointsContainer>
           <CheckpointsList checkpoints={checkpoints} />
@@ -70,19 +113,20 @@ const CreatePage = ({ trip, changeTripName, createRoadmap, fetchWeather }) => {
           </Link>
         </CheckpointsContainer>
       }
-      <TripForm />
+      {opened && <TripForm />}
     </Container>
   )
 }
 
 const mapStateToProps = (state) => ({
   trip: state.trip,
+  form: state.form
 })
 
 const mapDispatchToProps = {
-  changeTripName,
   createRoadmap,
-  fetchWeather
+  fetchWeather,
+  openForm
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePage)
