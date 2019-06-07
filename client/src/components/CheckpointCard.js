@@ -1,20 +1,42 @@
 import React from 'react'
 import styled from 'styled-components'
+import deleteBtn from '../assets/icons/delete-button.svg'
 
 const CardContainer = styled.div`
+  position: relative;
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  flex-direction: column;
+  background: #f5f5f5;
   width: 100%;
-  padding: 15px 30px;
+  height: 80px;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 30px;
+  margin: 2.5px 0;
 `
 
+const LocationName = styled.h3`
+  font-size: 16px;
+  font-weight: 600;
+`
 
-const LocationName = styled.h3``
+const LocationDate = styled.span`
+  font-size: 16px;
+`
 
-const LocationDate = styled.span``
+const DeleteButton = styled.div`
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 15px;
+  height: 15px;
+`
 
+const DeleteImg = styled.img`
+  display: block;
+  width: 100%;
+  height: auto;
+`
 
 const CheckpointCard = ({ checkpoint }) => {
 
@@ -23,7 +45,12 @@ const CheckpointCard = ({ checkpoint }) => {
   return (
     <CardContainer>
       <LocationName>{location.name}</LocationName>
-      <LocationDate>{startDate === endDate ? startDate : startDate + ' > ' + endDate}</LocationDate>
+      <LocationDate>
+        {startDate === endDate ? startDate : startDate + ' > ' + endDate}
+      </LocationDate>
+      <DeleteButton>
+        <DeleteImg src={deleteBtn} alt="delete button"/>
+      </DeleteButton>
     </CardContainer>
   )
 }
