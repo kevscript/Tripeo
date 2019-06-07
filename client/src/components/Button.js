@@ -16,12 +16,6 @@ const ButtonContainer = styled.button`
     cursor: not-allowed;
     background: rgba(0,0,0,0.1);
   }
-
-  @media (max-width: 800px) {
-    margin: 10px 0;
-    padding: 10px 20px;
-    font-size: 15px;
-  }
 `
 
 ButtonContainer.displayName = 'ButtonContainer'
