@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import deleteBtn from '../assets/icons/delete-button.svg'
+import { connect } from 'react-redux'
+import { deleteCheckpoint } from '../actions'
 
 const CardContainer = styled.div`
   position: relative;
@@ -25,6 +27,7 @@ const LocationDate = styled.span`
 `
 
 const DeleteButton = styled.div`
+  cursor: pointer;
   position: absolute;
   top: 15px;
   right: 15px;
@@ -38,21 +41,30 @@ const DeleteImg = styled.img`
   height: auto;
 `
 
-const CheckpointCard = ({ checkpoint }) => {
+const CheckpointCard = ({ checkpoint, deleteCheckpoint }) => {
 
   const { location, startDate, endDate } = checkpoint
 
+  const handleDelete = (e) => {
+    const id = e.target.parentNode.parentNode.getAttribute("data-id")
+    deleteCheckpoint(id)
+  }
+
   return (
-    <CardContainer>
+    <CardContainer data-id={checkpoint.startDate}>
       <LocationName>{location.name}</LocationName>
       <LocationDate>
         {startDate === endDate ? startDate : startDate + ' > ' + endDate}
       </LocationDate>
-      <DeleteButton>
-        <DeleteImg src={deleteBtn} alt="delete button"/>
+      <DeleteButton onClick={handleDelete}>
+        <DeleteImg src={deleteBtn} alt="delete button" />
       </DeleteButton>
     </CardContainer>
   )
 }
 
-export default CheckpointCard
+const mapDispatchToProps = {
+  deleteCheckpoint
+}
+
+export default connect(null, mapDispatchToProps)(CheckpointCard)
