@@ -1,6 +1,7 @@
 import {
   CHANGE_TRIP_NAME,
   ADD_NEW_CHECKPOINT,
+  DELETE_CHECKPOINT,
   RESET_ALL
 } from '../actions/types'
 
@@ -27,9 +28,17 @@ export default (state = initialState, action) => {
           {
             location: { ...action.payload.location },
             startDate: action.payload.startDate,
-            endDate: action.payload.endDate
+            endDate: action.payload.endDate,
+            start: action.payload.start,
+            end: action.payload.end
           }
         ]
+      }
+
+    case DELETE_CHECKPOINT:
+      return {
+        ...state,
+        checkpoints: [...action.payload]
       }
 
     case RESET_ALL:

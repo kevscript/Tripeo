@@ -10,6 +10,7 @@ export const OPEN_FORM = 'OPEN_FORM'
 // types to handle specific trip
 export const CHANGE_TRIP_NAME = 'CHANGE_TRIP_NAME'
 export const ADD_NEW_CHECKPOINT = 'ADD_NEW_CHECKPOINT'
+export const DELETE_CHECKPOINT = 'DELETE_CHECKPOINT'
 
 // types to handle weather
 export const CREATE_ROADMAP = 'CREATE_ROADMAP'

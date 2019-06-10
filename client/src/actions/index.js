@@ -7,6 +7,7 @@ import {
   CHANGE_END_MINDATE,
   CHANGE_TRIP_NAME,
   ADD_NEW_CHECKPOINT,
+  DELETE_CHECKPOINT,
   RESET_FORM,
   OPEN_FORM,
   CREATE_ROADMAP,
@@ -17,11 +18,10 @@ import {
 } from './types'
 import parseLocaleDate from '../utils/parseLocaleDate'
 
-
+// reset state of app
 export const resetAll = () => ({
   type: RESET_ALL
 })
-
 
 // open form
 export const openForm = () => ({
@@ -77,23 +77,58 @@ export const changeTripName = (name) => ({
 export const addNewCheckpoint = () =>
   (dispatch, getState) => {
     // gets location and date range of Form
-    const location = getState().form.location
-    const start = getState().form.startLocale
-    const end = getState().form.endLocale
+    const form = getState().form
+    const { location, start, startLocale, end, endLocale } = form
 
     dispatch({
       type: ADD_NEW_CHECKPOINT,
       payload: {
         location: { ...location },
-        startDate: start,
-        endDate: end
+        startDate: startLocale,
+        endDate: endLocale,
+        start: start,
+        end: end
       }
     })
 
-    // reset form and passing the end date of the last checkpoint to avoid overlapping dates between checkpoints
+    // reset form and passing the end date of the last checkpoint from the Form input to avoid overlapping dates between checkpoints
     dispatch({
       type: RESET_FORM,
-      payload: getState().form.end
+      payload: end
+    })
+  }
+
+
+// deletes a specific checkpoint from the list
+export const deleteCheckpoint = (id) =>
+  (dispatch, getState) => {
+    // get the checkpoints array
+    const checkpoints = [...getState().trip.checkpoints]
+    // filter the specific checkpoint out
+    const newCheckpoints = checkpoints.filter(cp => cp.startDate !== id)
+
+    dispatch({
+      type: DELETE_CHECKPOINT,
+      payload: newCheckpoints
+    })
+
+    // get the new checkpoints after dispatch
+    const updatedCheckpoints = [...getState().trip.checkpoints]
+    // minDate represents the minimum Date from which the Date picker can start
+    let minDate
+    // if there is checkpoints in the array
+    if (updatedCheckpoints.length > 0) {
+      // set minDate to the end Date object of the last checkpoint in the array
+      minDate = updatedCheckpoints[updatedCheckpoints.length - 1].end
+    } else {
+      // if there is no checkpoints in the array, set it to now
+      minDate = new Date()
+    }
+
+    // reset form and passing a minimum Date for the date picker, to avoid overlapping dates between checkpoints
+    dispatch({
+      type: RESET_FORM,
+      payload: minDate
     })
   }
 
