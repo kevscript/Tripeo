@@ -15,8 +15,14 @@ const HourlyItem = styled.li`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  border: 1px solid rgba(0,0,0,0.2);
+  border-top: 1px solid rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(0,0,0,0.2);
   padding: 10px 30px;
+
+  @media (min-width: 800px) {
+    border-left: 1px solid rgba(0,0,0,0.2);
+    border-right: 1px solid rgba(0,0,0,0.2);
+  }
 `
 
 const TimeContainer = styled.div`

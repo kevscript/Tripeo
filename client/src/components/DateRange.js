@@ -17,6 +17,7 @@ const StyledDateInput = styled(DatePicker)`
   border: 1px solid lightgrey;
   border-radius: 3px;
   font-size: 14px;
+  font-weight: 600;
   width: 125px;
   color: ${props => props.theme.colors.primary};
 `

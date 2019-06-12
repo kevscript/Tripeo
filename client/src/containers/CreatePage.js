@@ -9,6 +9,8 @@ import { createRoadmap, fetchWeather, openForm } from '../actions'
 
 const Container = styled.div`
   width: 100%;
+  min-height: 100vh;
+  max-width: 800px;
   margin: 0 auto;
   flex-direction: column;
   background: #fff;
@@ -36,7 +38,7 @@ const CheckpointsContainer = styled.div`
   align-items: center;
   width: 100%;
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 800px;
 `
 
 const Header = styled.div`
@@ -49,7 +51,7 @@ const Header = styled.div`
 `
 
 const HeaderTitle = styled.h3`
-  font-size: 20px;
+  font-size: 26px;
   font-weight: 600;
 `
 
@@ -60,6 +62,23 @@ const HeaderButton = styled.div`
   border: ${props => `1px solid ${props.theme.colors.primary}`};
   border-radius: 50%;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background: ${props => props.theme.colors.primaryDark};
+    border: ${props => `1px solid ${props.theme.colors.primaryDark}`};
+    transform: scale(1.1) rotate(90deg);
+
+    &::after {
+      background: #fff;
+      height: 3px;
+    }
+
+    &::before {
+      background: #fff;
+      width: 3px;
+    }
+  }
 
   &::after {
     display: block;
@@ -71,6 +90,7 @@ const HeaderButton = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     background: ${props => props.theme.colors.primary};
+    transition: all 0.2s ease-in-out;
   }
 
   &::before {
@@ -83,7 +103,25 @@ const HeaderButton = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     background: ${props => props.theme.colors.primary};
+    transition: all 0.2s ease-in-out;
   }
+`
+
+const ButtonContainer = styled.div`
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+  z-index: 2;
+`
+
+const ButtonLink = styled(Link)`
+  text-decoration: none;
+  color: #fff;
 `
 
 const CreatePage = ({ trip, createRoadmap, fetchWeather, form, openForm }) => {
@@ -106,12 +144,18 @@ const CreatePage = ({ trip, createRoadmap, fetchWeather, form, openForm }) => {
         <HeaderButton onClick={handleFormOpen} />
       </Header>
       {checkpoints.length > 0 &&
-        <CheckpointsContainer>
-          <CheckpointsList checkpoints={checkpoints} />
-          <Link to='/weather'>
-            <Button big handleClick={handleWeather}>Weather It</Button>
-          </Link>
-        </CheckpointsContainer>
+        <>
+          <CheckpointsContainer>
+            <CheckpointsList checkpoints={checkpoints} />
+          </CheckpointsContainer>
+          <ButtonContainer>
+            <Button big handleClick={handleWeather}>
+              <ButtonLink to='/weather'>
+                Forecast
+              </ButtonLink>
+            </Button>
+          </ButtonContainer>
+        </>
       }
       {opened && <TripForm />}
     </Container>

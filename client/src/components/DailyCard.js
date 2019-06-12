@@ -6,18 +6,18 @@ const DailyItem = styled.div`
   cursor: pointer;
   position: relative;
   display: flex;
-  height: 114px;
+  height: 80px;
   flex-direction: row;
   align-items: center;
   width: 100%;
-  background: ${props => props.theme.colors.primary};
-  padding: 30px;
+  background: ${props => props.open ? props.theme.colors.primaryDark : props.theme.colors.primary};
+  padding: 0 30px;
   color: #fff;
   overflow-x: hidden;
+  transition: all 0.3s ease-in-out;
 
-  @media (max-width: 540px) {
-    padding: 10px;
-    height: 60px;
+  @media (min-width: 540px) {
+    height: 110px;
   }
 `
 
@@ -44,12 +44,8 @@ const When = styled.span`
 `
 
 const Desc = styled.p`
-  font-size: 20px;
   font-weight: 600;
-
-  @media (max-width: 800px) {
-    font-size: 16px;
-  }
+  font-size: 16px;
 
   @media (max-width: 540px) {
     display: none;
@@ -85,7 +81,7 @@ const Img = styled.img`
 const DailyCard = ({ forecast, cp, handleClick, open }) => {
   return (
     <div>
-      <DailyItem key={cp.timestamp} onClick={handleClick}>
+      <DailyItem key={cp.timestamp} onClick={handleClick} open={open}>
         <InfoContainer>
           <Where>{cp.location.name}</Where>
           <When>{new Date(cp.timestamp).toLocaleDateString()}</When>

@@ -33,8 +33,9 @@ const FormContainer = styled.div`
 `
 
 const InputsContainer = styled.div`
-  margin: 0;
+  margin: 0 auto;
   width: 100%;
+  max-width: 600px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -62,6 +63,11 @@ const CloseButton = styled.div`
   right: 40px;
   width: 30px;
   height: 30px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1) rotate(90deg);
+  }
 `
 
 const CloseImg = styled.img`
