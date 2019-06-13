@@ -86,8 +86,8 @@ const WeatherPage = ({ weather, resetAll }) => {
             <ButtonLink to="/create">
               <Icon src={PencilIcon} />
             </ButtonLink>
-            <ButtonLink to="/create">
-              <Icon src={UndoIcon} handleClick={handleReset} />
+            <ButtonLink to="/create" onClick={handleReset}>
+              <Icon src={UndoIcon} />
             </ButtonLink>
           </ButtonsContainer>
         </Header>
