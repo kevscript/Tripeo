@@ -1,6 +1,6 @@
 import React from 'react'
 import DatePicker from 'react-datepicker'
-import "react-datepicker/dist/react-datepicker.css"
+import "../styles/datepicker.css"
 import styled from 'styled-components'
 
 const RangeContainer = styled.div`
