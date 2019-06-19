@@ -6,6 +6,9 @@ import WeatherCard from '../components/WeatherCard'
 import { Link } from 'react-router-dom'
 import UndoIcon from '../assets/icons/undo.svg'
 import PencilIcon from '../assets/icons/pencil.svg'
+import Logo from '../assets/icons/sunset.svg'
+import { BarLoader } from 'react-spinners';
+import theme from '../styles/theme'
 
 const Container = styled.div`
   width: 100%;
@@ -69,18 +72,34 @@ const HeaderTitle = styled.h3`
   font-weight: 600;
 `
 
+const LogoContainer = styled.div`
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`
+
+const LogoImg = styled.img`
+  display: block;
+  width: 100%;
+  height: auto;
+`
+
 const WeatherPage = ({ weather, resetAll }) => {
 
-  const { roadmap, forecasts } = weather
+  const { roadmap, forecasts, loading } = weather
 
   const handleReset = async () => {
     await resetAll()
   }
-
-  return (
-    <Container>
-      {/*roadmap.length === forecasts.length && roadmap.length > 0 &&*/
+  if (loading) {
+    return (
+      <Container>
         <Header>
+          <LogoContainer>
+            <LogoImg src={Logo} />
+          </LogoContainer>
           <HeaderTitle>Forecasts</HeaderTitle>
           <ButtonsContainer>
             <ButtonLink to="/create">
@@ -91,7 +110,31 @@ const WeatherPage = ({ weather, resetAll }) => {
             </ButtonLink>
           </ButtonsContainer>
         </Header>
-      }
+        <BarLoader 
+          sizeUnit={"px"}
+          size={150}
+          color={theme.colors.primary}
+          loading={loading}
+        />
+      </Container>
+    )
+  }   
+  return (
+    <Container>
+      <Header>
+        <LogoContainer>
+          <LogoImg src={Logo} />
+        </LogoContainer>
+        <HeaderTitle>Forecasts</HeaderTitle>
+        <ButtonsContainer>
+          <ButtonLink to="/create">
+            <Icon src={PencilIcon} />
+          </ButtonLink>
+          <ButtonLink to="/create" onClick={handleReset}>
+            <Icon src={UndoIcon} />
+          </ButtonLink>
+        </ButtonsContainer>
+      </Header>
       <CheckpointsList>
         {roadmap.length === forecasts.length && roadmap.length > 0 && roadmap.map((cp, i) => {
           return (

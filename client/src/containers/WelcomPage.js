@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Button from '../components/Button'
+import Logo from '../assets/icons/sunset.svg'
 
 const Container = styled.div`
   display: flex;
@@ -36,11 +37,27 @@ const Para = styled.p`
   text-align: center;
 `
 
+const LogoContainer = styled.div`
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const LogoImg = styled.img`
+  display: block;
+  width: 100%;
+  height: auto;
+`
+
 const WelcomePage = () => {
   return (
     <Container>
       <ContentContainer>
-        <Title>TripWeather</Title>
+        <LogoContainer>
+          <LogoImg src={Logo} />
+        </LogoContainer>
+        <Title>Tripeo</Title>
         <Para>Catch the weather before it catches you.</Para>
       </ContentContainer>
       <ContentContainer>

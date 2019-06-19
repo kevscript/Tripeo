@@ -6,6 +6,7 @@ import CheckpointsList from '../components/CheckpointsList'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createRoadmap, fetchWeather, openForm } from '../actions'
+import Logo from '../assets/icons/sunset.svg'
 
 const Container = styled.div`
   width: 100%;
@@ -66,7 +67,7 @@ const HeaderButton = styled.div`
 
   &:hover {
     background: ${props => props.theme.colors.primaryDark};
-    border: ${props => `1px solid ${props.theme.colors.primaryDark}`};
+    border: 0;
     transform: scale(1.1) rotate(90deg);
 
     &::after {
@@ -124,6 +125,20 @@ const ButtonLink = styled(Link)`
   color: #fff;
 `
 
+const LogoContainer = styled.div`
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`
+
+const LogoImg = styled.img`
+  display: block;
+  width: 100%;
+  height: auto;
+`
+
 const CreatePage = ({ trip, createRoadmap, fetchWeather, form, openForm }) => {
   const { opened } = form
   const { checkpoints } = trip
@@ -140,6 +155,9 @@ const CreatePage = ({ trip, createRoadmap, fetchWeather, form, openForm }) => {
   return (
     <Container>
       <Header>
+        <LogoContainer>
+          <LogoImg src={Logo} />
+        </LogoContainer>
         <HeaderTitle>Roadmap</HeaderTitle>
         <HeaderButton onClick={handleFormOpen} />
       </Header>
