@@ -1,6 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import stampToTime from '../utils/stampToTime'
+import Slider from 'react-slick'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "../styles/slider.css"
 
 const CardContainer = styled.div`
   display: flex;
@@ -17,9 +21,10 @@ const HourlyItem = styled.li`
   width: 100%;
   border-top: 1px solid rgba(0,0,0,0.2);
   border-bottom: 1px solid rgba(0,0,0,0.2);
-  padding: 10px 30px;
+  padding: 15px 15px;
 
   @media (min-width: 800px) {
+    padding: 15px 30px;
     border-left: 1px solid rgba(0,0,0,0.2);
     border-right: 1px solid rgba(0,0,0,0.2);
   }
@@ -32,41 +37,38 @@ const TimeContainer = styled.div`
 `
 
 const StatsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-
-  @media (max-width: 800px) {
-    display: none;
-  }
+  min-height: 0px; 
+  min-width: 0px;
+  margin: 0 50px;
 `
 
-const StatsList = styled.ul`
+/*const StatsList = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   list-style: none;
-`
+`*/
 
-const StatsItem = styled.li`
+const StatsItem = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 10px;
-  width: 70px;
+  width: 100%;
+  height: 100%;
 `
 
-const ItemName = styled.span`
+const ItemName = styled.p`
   font-size: 10px;
   color: #333;
+  text-align: center;
 `
 
 const ItemValue = styled.p`
   font-size: 14px;
   font-weight: 600;
+  text-align: center;
 `
 
 const TempContainer = styled.div`
@@ -74,7 +76,10 @@ const TempContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  min-width: 100px;
+
+  @media (min-width: 800px) {
+    min-width: 100px;
+  }
 `
 
 const IconContainer = styled.div`
@@ -92,6 +97,10 @@ const Icon = styled.img`
   height: auto;
 `
 
+const Text = styled.p `
+font-weight: 600;
+`
+
 const HourlyCard = ({ data, timeZone }) => {
   const {
     time,
@@ -104,14 +113,44 @@ const HourlyCard = ({ data, timeZone }) => {
     icon
   } = data
 
+  const sliderSettings = {
+    arrow: true,
+    speed: 800,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }
+      }
+    ]
+  }
+
   return (
     <CardContainer>
       <HourlyItem>
         <TimeContainer>
-          <h3>{stampToTime(time, timeZone)}</h3>
+          <Text>{stampToTime(time, timeZone)}</Text>
         </TimeContainer>
         <StatsContainer>
-          <StatsList>
+          <Slider {...sliderSettings}>
             <StatsItem>
               <ItemName>Humidity (%)</ItemName>
               <ItemValue>{Math.round(humidity * 100)}</ItemValue>
@@ -132,13 +171,13 @@ const HourlyCard = ({ data, timeZone }) => {
               <ItemName>Cloudiness (%)</ItemName>
               <ItemValue>{Math.round(cloudCover * 100)}</ItemValue>
             </StatsItem>
-          </StatsList>
+          </Slider>
         </StatsContainer>
         <TempContainer>
           <IconContainer>
             <Icon src={require(`../assets/icons/${icon}.svg`)} alt="weather icon" />
           </IconContainer>
-          <h3>{Math.round(temperature)}°C</h3>
+          <Text>{Math.round(temperature)}°C</Text>
         </TempContainer>
       </HourlyItem>
     </CardContainer>
