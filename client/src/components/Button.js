@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const ButtonContainer = styled.button`
   font-family: 'Source Sans Pro', 'Roboto', sans-serif;
@@ -34,6 +35,16 @@ const Button = ({ children, big, handleClick, disabled }) => {
       {children}
     </ButtonContainer>
   )
+}
+
+Button.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node
+  ]).isRequired,
+  big: PropTypes.bool,
+  disabled: PropTypes.bool,
+  handleClick: PropTypes.func.isRequired
 }
 
 export default Button
