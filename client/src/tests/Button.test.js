@@ -40,23 +40,4 @@ describe('Button Component', () => {
       expect(props.handleClick).toHaveBeenCalled()
     })
   })
-
-  describe('when it has NO props', () => {
-
-    let component
-    let wrapper
-
-    beforeEach(() => {
-      component = shallow(<Button />)
-      wrapper = component.find('[data-test="ButtonContainer"]')
-    })
-
-    it('should have a container parent', () => {
-      expect(wrapper.length).toBe(1)
-    })
-
-    it('should render without text', () => {
-      expect(wrapper.text()).toBe('')
-    })
-  })
 })
