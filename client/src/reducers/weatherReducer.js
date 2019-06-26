@@ -8,8 +8,8 @@ import {
 
 const initialState = {
   loading: true,
-  roadmap: '',
-  forecasts: ''
+  roadmap: [],
+  forecasts: []
 }
 
 export default (state = initialState, action) => {
