@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Component when it has NO props should renders correctly 1`] = `ShallowWrapper {}`;
+
+exports[`Button Component when it has props should renders correctly 1`] = `ShallowWrapper {}`;

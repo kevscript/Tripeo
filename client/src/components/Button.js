@@ -29,10 +29,20 @@ const ButtonContainer = styled.button`
 
 ButtonContainer.displayName = 'ButtonContainer'
 
-const Button = ({ children, big, handleClick, disabled }) => {
+const Button = ({
+  children,
+  big = false,
+  handleClick,
+  disabled = false
+}) => {
   return (
-    <ButtonContainer big={big} disabled={disabled} onClick={handleClick} data-test='ButtonContainer'>
-      {children}
+    <ButtonContainer
+      big={big}
+      disabled={disabled}
+      onClick={handleClick}
+      data-test='Button'
+    >
+      {children ? children : 'Button'}
     </ButtonContainer>
   )
 }
@@ -41,10 +51,10 @@ Button.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.node
-  ]).isRequired,
+  ]),
   big: PropTypes.bool,
   disabled: PropTypes.bool,
-  handleClick: PropTypes.func.isRequired
+  handleClick: PropTypes.func
 }
 
 export default Button
