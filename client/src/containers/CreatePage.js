@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createRoadmap, fetchWeather, openForm } from '../actions'
 import Logo from '../assets/icons/sunset.svg'
+import PropTypes from 'prop-types'
 
 const Container = styled.div`
   width: 100%;
@@ -189,6 +190,14 @@ const mapDispatchToProps = {
   createRoadmap,
   fetchWeather,
   openForm
+}
+
+CreatePage.propTypes = {
+  trip: PropTypes.object,
+  createRoadmap: PropTypes.func,
+  fetchWeather: PropTypes.func,
+  form: PropTypes.object,
+  openForm: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePage)

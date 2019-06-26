@@ -9,6 +9,7 @@ import PencilIcon from '../assets/icons/pencil.svg'
 import Logo from '../assets/icons/sunset.svg'
 import { BarLoader } from 'react-spinners';
 import theme from '../styles/theme'
+import PropTypes from 'prop-types'
 
 const Container = styled.div`
   width: 100%;
@@ -110,7 +111,7 @@ const WeatherPage = ({ weather, resetAll }) => {
             </ButtonLink>
           </ButtonsContainer>
         </Header>
-        <BarLoader 
+        <BarLoader
           sizeUnit={"px"}
           size={150}
           color={theme.colors.primary}
@@ -118,7 +119,7 @@ const WeatherPage = ({ weather, resetAll }) => {
         />
       </Container>
     )
-  }   
+  }
   return (
     <Container>
       <Header>
@@ -152,6 +153,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   resetAll
+}
+
+WeatherPage.propTypes = {
+  weather: PropTypes.object,
+  resetAll: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WeatherPage)

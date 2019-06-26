@@ -15,6 +15,7 @@ import {
   addNewCheckpoint,
   openForm
 } from '../actions'
+import PropTypes from 'process'
 
 const FormContainer = styled.div`
   position: fixed;
@@ -151,6 +152,17 @@ const mapDispatchToProps = {
   changeEndDate,
   addNewCheckpoint,
   openForm
+}
+
+TripForm.propTypes = {
+  form: PropTypes.object,
+  changeLocation: PropTypes.func,
+  changeStartDate: PropTypes.func,
+  changeEndDate: PropTypes.func,
+  changeStartMinDate: PropTypes.func,
+  changeEndMinDate: PropTypes.func,
+  addNewCheckpoint: PropTypes.func,
+  openForm: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TripForm)

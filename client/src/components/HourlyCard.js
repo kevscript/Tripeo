@@ -5,6 +5,7 @@ import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../styles/slider.css"
+import PropTypes from 'prop-types'
 
 const CardContainer = styled.div`
   display: flex;
@@ -97,7 +98,7 @@ const Icon = styled.img`
   height: auto;
 `
 
-const Text = styled.p `
+const Text = styled.p`
 font-weight: 600;
 `
 
@@ -176,6 +177,11 @@ const HourlyCard = ({ data, timeZone }) => {
       </HourlyItem>
     </CardContainer>
   )
+}
+
+HourlyCard.propTypes = {
+  data: PropTypes.object,
+  timeZone: PropTypes.string,
 }
 
 export default HourlyCard

@@ -2,6 +2,7 @@ import React from 'react'
 import DatePicker from 'react-datepicker'
 import "../styles/datepicker.css"
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const RangeContainer = styled.div`
   width: 100%;
@@ -72,6 +73,24 @@ const DateRange = ({
       </InputContainer>
     </RangeContainer>
   )
+}
+
+DateRange.propTypes = {
+  handleStartDateChange: PropTypes.func.isRequired,
+  handleEndDateChange: PropTypes.func.isRequired,
+  startDate: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Date)
+  ]),
+  endDate: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Date)
+  ]),
+  startMin: PropTypes.instanceOf(Date),
+  endMin: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Date)
+  ]),
 }
 
 export default DateRange
