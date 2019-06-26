@@ -2,6 +2,7 @@ import React from 'react'
 import AlgoliaPlaces from 'algolia-places-react'
 import '../styles/algoliaplaces.css'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const Label = styled.span`
   font-size: 14px;
@@ -10,9 +11,10 @@ const Label = styled.span`
 
 const PlacesInput = ({ handleLocation }) => {
   return (
-    <>
-      <Label>Location (cities, adresses, ...)</Label>
+    <div>
+      <Label data-test='Label'>Location (cities, adresses, ...)</Label>
       <AlgoliaPlaces
+        data-test="AlgoliaInput"
         placeholder='eg. Paris, Ile-de-France, France'
 
         options={{
@@ -38,8 +40,12 @@ const PlacesInput = ({ handleLocation }) => {
         onError={''/*({ message }) =>
           console.log('Fired when we could not make the request to Algolia Places servers for any reason but reaching your rate limit.')*/}
       />
-    </>
+    </div>
   )
+}
+
+PlacesInput.propTypes = {
+  handleLocation: PropTypes.func
 }
 
 export default PlacesInput
