@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Arrow from '../assets/icons/arrow.svg'
+import PropTypes from 'prop-types'
 
 const DailyItem = styled.div`
   cursor: pointer;
@@ -80,21 +81,31 @@ const Img = styled.img`
 
 const DailyCard = ({ forecast, cp, handleClick, open }) => {
   return (
-    <div>
-      <DailyItem key={cp.timestamp} onClick={handleClick} open={open}>
-        <InfoContainer>
-          <Where>{cp.location.name}</Where>
-          <When>{new Date(cp.timestamp).toLocaleDateString()}</When>
-        </InfoContainer>
-        <DescContainer>
-          <Desc>{forecast.daily.data[0].summary}</Desc>
-        </DescContainer>
-        <ArrowContainer>
-          <Img src={Arrow} open={open} />
-        </ArrowContainer>
-      </DailyItem>
-    </div>
+    <DailyItem 
+      key={cp.timestamp} 
+      onClick={handleClick} 
+      open={open} 
+      data-test="DailyItem"
+    >
+      <InfoContainer>
+        <Where data-test="Where">{cp.location.name}</Where>
+        <When data-test="When">{new Date(cp.timestamp).toLocaleDateString()}</When>
+      </InfoContainer>
+      <DescContainer>
+        <Desc data-test="Desc">{forecast.daily.data[0].summary}</Desc>
+      </DescContainer>
+      <ArrowContainer>
+        <Img src={Arrow} open={open} data-test="Icon"/>
+      </ArrowContainer>
+    </DailyItem>
   )
+}
+
+DailyCard.propTypes = {
+  forecast: PropTypes.object,
+  open: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  cp: PropTypes.object
 }
 
 export default DailyCard
