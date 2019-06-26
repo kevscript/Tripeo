@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CheckpointsList component when the list has items should render correctly 1`] = `ShallowWrapper {}`;
+
+exports[`CheckpointsList component when the list is empty should render correctly 1`] = `ShallowWrapper {}`;
