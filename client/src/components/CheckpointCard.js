@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import deleteBtn from '../assets/icons/delete-button.svg'
 import { connect } from 'react-redux'
 import { deleteCheckpoint } from '../actions'
+import PropTypes from 'prop-types'
 
 const CardContainer = styled.div`
   position: relative;
@@ -41,22 +42,23 @@ const DeleteImg = styled.img`
   height: auto;
 `
 
-const CheckpointCard = ({ checkpoint, deleteCheckpoint }) => {
+export const CheckpointCard = ({ checkpoint, deleteCheckpoint }) => {
 
   const { location, startDate, endDate } = checkpoint
 
-  const handleDelete = (e) => {
-    const id = e.target.parentNode.parentNode.getAttribute("data-id")
-    deleteCheckpoint(id)
+  const handleDelete = () => {
+    deleteCheckpoint(startDate)
   }
 
   return (
-    <CardContainer data-id={checkpoint.startDate}>
-      <LocationName>{location.name}</LocationName>
-      <LocationDate>
-        {startDate === endDate ? startDate : startDate + ' > ' + endDate}
+    <CardContainer data-test="CardContainer">
+      <LocationName data-test="LocationName">
+        {location.name}
+      </LocationName>
+      <LocationDate data-test="LocationDate">
+        {startDate === endDate ? startDate : startDate + ' to ' + endDate}
       </LocationDate>
-      <DeleteButton onClick={handleDelete}>
+      <DeleteButton onClick={handleDelete} data-test="DeleteButton">
         <DeleteImg src={deleteBtn} alt="delete button" />
       </DeleteButton>
     </CardContainer>
@@ -65,6 +67,11 @@ const CheckpointCard = ({ checkpoint, deleteCheckpoint }) => {
 
 const mapDispatchToProps = {
   deleteCheckpoint
+}
+
+CheckpointCard.propTypes = {
+  checkpoint: PropTypes.object,
+  deleteCheckpoint: PropTypes.func,
 }
 
 export default connect(null, mapDispatchToProps)(CheckpointCard)
