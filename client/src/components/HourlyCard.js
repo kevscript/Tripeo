@@ -139,40 +139,40 @@ const HourlyCard = ({ data, timeZone }) => {
   }
 
   return (
-    <CardContainer>
+    <CardContainer data-test="CardContainer">
       <HourlyItem>
         <TimeContainer>
-          <Text>{stampToTime(time, timeZone)}</Text>
+          <Text data-test="time">{stampToTime(time, timeZone)}</Text>
         </TimeContainer>
         <StatsContainer>
           <Slider {...sliderSettings}>
             <StatsItem>
               <ItemName>Humidity (%)</ItemName>
-              <ItemValue>{Math.round(humidity * 100)}</ItemValue>
+              <ItemValue data-test="humidity">{Math.round(humidity * 100)}</ItemValue>
             </StatsItem>
             <StatsItem>
               <ItemName>Wind (km/h)</ItemName>
-              <ItemValue>{Math.round(windSpeed * 10) / 10}</ItemValue>
+              <ItemValue data-test="wind">{Math.round(windSpeed * 10) / 10}</ItemValue>
             </StatsItem>
             <StatsItem>
               <ItemName>UV Index</ItemName>
-              <ItemValue>{uvIndex}</ItemValue>
+              <ItemValue data-test="uvIndex">{uvIndex}</ItemValue>
             </StatsItem>
             <StatsItem>
               <ItemName>Visiblity (km)</ItemName>
-              <ItemValue>{Math.round(visibility * 10) / 10}</ItemValue>
+              <ItemValue data-test="visibility">{Math.round(visibility * 10) / 10}</ItemValue>
             </StatsItem>
             <StatsItem>
               <ItemName>Cloudiness (%)</ItemName>
-              <ItemValue>{Math.round(cloudCover * 100)}</ItemValue>
+              <ItemValue data-test="cloudiness">{Math.round(cloudCover * 100)}</ItemValue>
             </StatsItem>
           </Slider>
         </StatsContainer>
         <TempContainer>
           <IconContainer>
-            <Icon src={require(`../assets/icons/${icon}.svg`)} alt="weather icon" />
+            <Icon data-test="icon" src={require(`../assets/icons/${icon}.svg`)} alt="weather icon" />
           </IconContainer>
-          <Text>{Math.round(temperature)}°C</Text>
+          <Text data-test="temperature">{Math.round(temperature)}°C</Text>
         </TempContainer>
       </HourlyItem>
     </CardContainer>
