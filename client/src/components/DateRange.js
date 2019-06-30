@@ -44,7 +44,7 @@ const DateRange = ({
   endMin
 }) => {
   return (
-    <RangeContainer>
+    <RangeContainer data-test="RangeContainer">
       <InputContainer>
         <Label>From (included)</Label>
         <StyledDateInput
@@ -56,6 +56,7 @@ const DateRange = ({
           onChange={handleStartDateChange}
           dateFormat="dd / MM / yyyy"
           minDate={startMin}
+          data-test="startRange"
         />
       </InputContainer>
       <InputContainer>
@@ -69,6 +70,7 @@ const DateRange = ({
           onChange={handleEndDateChange}
           dateFormat="dd / MM / yyyy"
           minDate={endMin}
+          data-test="endRange"
         />
       </InputContainer>
     </RangeContainer>
