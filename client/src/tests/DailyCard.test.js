@@ -59,4 +59,9 @@ describe('DailyCard component', () => {
     const icon = wrapper.find('[data-test="Icon"]')
     expect(icon.length).toBe(1)
   })
+
+  test('should trigger event listener on click', () => {
+    wrapper.simulate('click')
+    expect(props.handleClick).toHaveBeenCalled()
+  })
 })
