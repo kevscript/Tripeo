@@ -20,10 +20,21 @@ const WeatherCard = ({ cp, forecast }) => {
 
   return (
     <CardContainer data-test='CardContainer'>
-      <DailyCard cp={cp} forecast={forecast} handleClick={handleOpen} open={open} />
+      <DailyCard 
+        cp={cp} 
+        forecast={forecast} 
+        handleClick={handleOpen} 
+        open={open} 
+        data-test='DailyContainer'
+      />
       {open && forecast.daily.data.length > 0 && forecast.hourly.data.map(hour => {
         return (
-          <HourlyCard key={hour.time} data={hour} timeZone={forecast.timezone} />
+          <HourlyCard 
+            key={hour.time} 
+            data={hour} 
+            timeZone={forecast.timezone} 
+            data-test='HourlyContainer' 
+          />
         )
       })}
     </CardContainer>
