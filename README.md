@@ -17,7 +17,7 @@ Tech Stack:
 - install server dependencies from root with `npm install`.
 - install client dependencies from root with `npm client-install`.
 
-- get your [DarkSky (https://darksky.net/dev) and [Algolia Places](https://community.algolia.com/places/) keys.
+- get your [DarkSky](https://darksky.net/dev) and [Algolia Places](https://community.algolia.com/places/) keys.
 
 - create an `.env` file in root folder to add your `DARKSKY_API_KEY` key.
 - create an `.env` file in client folder to add your `REACT_APP_ALGOLIA_APP_ID` and `REACT_APP_ALGOLIA_API_KEY` public keys.
