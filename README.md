@@ -1,6 +1,7 @@
 ## 1. About
 
 Tripeo is a React app thats helps you . [Live Demo](https://tripeo.herokuapp.com/)
+
 It leverages the [DarkSky Api](https://darksky.net/dev) for weather forecasts and [Algolia Places](https://community.algolia.com/places/) for input autocompletion (algolia-places-react hooks the api to React).
 
 Tech Stack:
