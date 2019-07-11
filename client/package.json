@@ -5,7 +5,7 @@
   "dependencies": {
     "@types/jest": "^24.0.12",
     "algolia-places-react": "^1.4.1",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "dotenv": "^7.0.0",
     "react": "^16.8.6",
     "react-datepicker": "^2.5.0",
