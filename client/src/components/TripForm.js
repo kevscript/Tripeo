@@ -15,7 +15,7 @@ import {
   addNewCheckpoint,
   openForm
 } from '../actions'
-import PropTypes from 'process'
+import PropTypes from 'prop-types'
 
 const FormContainer = styled.div`
   position: fixed;
