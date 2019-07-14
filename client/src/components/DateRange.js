@@ -48,13 +48,13 @@ const DateRange = ({
       <InputContainer>
         <Label>From (included)</Label>
         <StyledDateInput
-          placeholderText='01 / 01 / 2020'
+          placeholderText="dd/MM/yyyy"
           selected={startDate}
           selectsStart
           startDate={startDate}
           endDate={endDate}
           onChange={handleStartDateChange}
-          dateFormat="dd / MM / yyyy"
+          dateFormat="dd/MM/yyyy"
           minDate={startMin}
           data-test="startRange"
         />
@@ -62,13 +62,13 @@ const DateRange = ({
       <InputContainer>
         <Label>To (included)</Label>
         <StyledDateInput
-          placeholderText='02 / 01 / 2020'
+          placeholderText="dd/MM/yyyy"
           selected={endDate}
           selectsEnd
           startDate={startDate}
           endDate={endDate}
           onChange={handleEndDateChange}
-          dateFormat="dd / MM / yyyy"
+          dateFormat="dd/MM/yyyy"
           minDate={endMin}
           data-test="endRange"
         />
