@@ -29,7 +29,8 @@ export default (state = initialState, action) => {
     case RESET_FORM:
       return {
         ...initialState,
-        startMin: action.payload
+        startMin: action.payload,
+        endMin: action.payload
       }
     
     case OPEN_FORM:
@@ -61,7 +62,8 @@ export default (state = initialState, action) => {
     case CHANGE_START_MINDATE:
       return {
         ...state,
-        startMin: action.payload
+        startMin: action.payload,
+        endMin: action.payload
       }
 
     case CHANGE_END_MINDATE:
