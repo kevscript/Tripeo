@@ -82,14 +82,21 @@ const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, change
   const { start, startMin, end, endMin, location } = form
 
   const handleStartDateChange = (date) => {
-    const locale = date.toLocaleDateString()
-    changeStartDate(date, locale)
-    changeEndMinDate(date, locale)
+    if (date !== null) {
+      const locale = date.toLocaleDateString()
+      changeStartDate(date, locale)
+      changeEndMinDate(date)
+      if (date >= end) {
+        changeEndDate(date, locale)
+      }
+    }
   }
 
   const handleEndDateChange = (date) => {
-    const locale = date.toLocaleDateString()
-    changeEndDate(date, locale)
+    if (date !== null && date >= start) {
+      const locale = date.toLocaleDateString()
+      changeEndDate(date, locale)
+    } 
   }
 
   const handleLocation = (location) => {
