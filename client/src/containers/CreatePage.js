@@ -163,19 +163,20 @@ const CreatePage = ({ trip, createRoadmap, fetchWeather, form, openForm }) => {
         <HeaderButton onClick={handleFormOpen} />
       </Header>
       {checkpoints.length > 0 &&
-        <>
-          <CheckpointsContainer>
-            <CheckpointsList checkpoints={checkpoints} />
-          </CheckpointsContainer>
-          <ButtonContainer>
-            <Button big handleClick={handleWeather}>
-              <ButtonLink to='/weather'>
-                Forecast
-              </ButtonLink>
-            </Button>
-          </ButtonContainer>
-        </>
+        <CheckpointsContainer>
+          <CheckpointsList checkpoints={checkpoints} />
+        </CheckpointsContainer>
       }
+      {checkpoints.length > 0 && opened === false &&
+        <ButtonContainer>
+          <Button big handleClick={handleWeather}>
+            <ButtonLink to='/weather'>
+              Forecast
+            </ButtonLink>
+          </Button>
+        </ButtonContainer>
+      }
+
       {opened && <TripForm />}
     </Container>
   )
