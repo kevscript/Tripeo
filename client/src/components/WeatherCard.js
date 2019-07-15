@@ -10,6 +10,12 @@ const CardContainer = styled.div`
   margin: 2px 0;
 `
 
+const HourlyContainer = styled.div`
+  overflow: hidden;
+  max-height: ${props => props.open ? '2000px' : 0};
+  transition: max-height 1s ease-in-out;
+`
+
 const WeatherCard = ({ cp, forecast }) => {
 
   const [open, setOpen] = useState(false)
@@ -20,23 +26,25 @@ const WeatherCard = ({ cp, forecast }) => {
 
   return (
     <CardContainer data-test='CardContainer'>
-      <DailyCard 
-        cp={cp} 
-        forecast={forecast} 
-        handleClick={handleOpen} 
-        open={open} 
+      <DailyCard
+        cp={cp}
+        forecast={forecast}
+        handleClick={handleOpen}
+        open={open}
         data-test='DailyContainer'
       />
-      {open && forecast.daily.data.length > 0 && forecast.hourly.data.map(hour => {
-        return (
-          <HourlyCard 
-            key={hour.time} 
-            data={hour} 
-            timeZone={forecast.timezone} 
-            data-test='HourlyContainer' 
-          />
-        )
-      })}
+      <HourlyContainer open={open}>
+        {forecast.daily.data.length > 0 && forecast.hourly.data.map(hour => {
+          return (
+            <HourlyCard
+              key={hour.time}
+              data={hour}
+              timeZone={forecast.timezone}
+              data-test='HourlyContainer'
+            />
+          )
+        })}
+      </HourlyContainer>
     </CardContainer>
   )
 }
