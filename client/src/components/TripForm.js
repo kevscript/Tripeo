@@ -13,7 +13,8 @@ import {
   changeEndMinDate,
   changeEndDate,
   addNewCheckpoint,
-  openForm
+  openForm,
+  clearLocation
 } from '../actions'
 import PropTypes from 'prop-types'
 
@@ -77,7 +78,7 @@ const CloseImg = styled.img`
   height: auto;
 `
 
-const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, changeStartMinDate, changeEndMinDate, addNewCheckpoint, openForm }) => {
+const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, changeStartMinDate, changeEndMinDate, addNewCheckpoint, openForm, clearLocation }) => {
 
   const { start, startMin, end, endMin, location } = form
 
@@ -103,6 +104,10 @@ const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, change
     changeLocation({ ...location.suggestion })
   }
 
+  const handleClear = () => {
+    clearLocation()
+  }
+
   const handleFormSubmit = () => {
     changeStartMinDate(end.setDate(end.getDate() + 1))
     addNewCheckpoint()
@@ -119,6 +124,7 @@ const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, change
       <PlacesContainer>
         <PlacesInput
           handleLocation={handleLocation}
+          handleClear={handleClear}
         />
       </PlacesContainer>
       <DateContainer>
@@ -158,7 +164,8 @@ const mapDispatchToProps = {
   changeStartMinDate,
   changeEndDate,
   addNewCheckpoint,
-  openForm
+  openForm,
+  clearLocation
 }
 
 TripForm.propTypes = {
@@ -169,7 +176,8 @@ TripForm.propTypes = {
   changeStartMinDate: PropTypes.func,
   changeEndMinDate: PropTypes.func,
   addNewCheckpoint: PropTypes.func,
-  openForm: PropTypes.func
+  openForm: PropTypes.func,
+  clearLocation: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TripForm)

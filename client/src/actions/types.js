@@ -6,6 +6,7 @@ export const CHANGE_END_DATE = 'CHANGE_END_DATE'
 export const CHANGE_END_MINDATE = 'CHANGE_END_MINDATE'
 export const RESET_FORM = 'RESET_FORM'
 export const OPEN_FORM = 'OPEN_FORM'
+export const CLEAR_LOCATION = 'CLEAR_LOCATION'
 
 // types to handle specific trip
 export const CHANGE_TRIP_NAME = 'CHANGE_TRIP_NAME'

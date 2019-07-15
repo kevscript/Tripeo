@@ -9,7 +9,7 @@ const Label = styled.span`
   margin-bottom: 5px;
 `
 
-const PlacesInput = ({ handleLocation }) => {
+const PlacesInput = ({ handleLocation, handleClear }) => {
   return (
     <div>
       <Label data-test='Label'>Location (cities, adresses, ...)</Label>
@@ -31,8 +31,7 @@ const PlacesInput = ({ handleLocation }) => {
         onCursorChanged={''/*({ rawAnswer, query, suggestion, suggestonIndex }) =>
           console.log('Fired when arrows keys are used to navigate suggestions.')*/}
 
-        onClear={''/*() =>
-          console.log('Fired when the input is cleared.')*/}
+        onClear={handleClear}
 
         onLimit={''/*({ message }) =>
           console.log('Fired when you reached your current rate limit.')*/}

@@ -14,7 +14,8 @@ import {
   FETCH_WEATHER_BEGIN,
   FETCH_WEATHER_ERROR,
   FETCH_WEATHER_SUCCESS,
-  RESET_ALL
+  RESET_ALL,
+  CLEAR_LOCATION
 } from './types'
 import parseLocaleDate from '../utils/parseLocaleDate'
 
@@ -33,6 +34,10 @@ export const openForm = () => ({
 export const changeLocation = (location) => ({
   type: CHANGE_LOCATION,
   payload: { ...location }
+})
+
+export const clearLocation = () => ({
+  type: CLEAR_LOCATION
 })
 
 // receives date Object from React-Datepicker 

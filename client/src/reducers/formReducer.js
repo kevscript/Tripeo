@@ -6,7 +6,8 @@ import {
   CHANGE_END_MINDATE,
   RESET_FORM,
   RESET_ALL,
-  OPEN_FORM
+  OPEN_FORM,
+  CLEAR_LOCATION
 } from '../actions/types'
 
 const initialState = {
@@ -43,6 +44,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         location: { ...action.payload }
+      }
+    
+    case CLEAR_LOCATION:
+      return {
+        ...state,
+        location: ''
       }
 
     case CHANGE_START_DATE:
