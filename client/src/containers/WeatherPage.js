@@ -30,18 +30,20 @@ const CheckpointsList = styled.ul`
 `
 
 const ButtonsContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: baseline;
+  width: 50px;
 `
 
 const ButtonLink = styled(Link)`
+  position: relative;
   width: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 20px;
 `
 
 const Icon = styled.img`
@@ -69,11 +71,12 @@ const Header = styled.div`
 `
 
 const HeaderTitle = styled.h3`
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 600;
 `
 
 const LogoContainer = styled.div`
+  position: relative;
   width: 50px;
   display: flex;
   justify-content: center;
@@ -83,7 +86,7 @@ const LogoContainer = styled.div`
 
 const LogoImg = styled.img`
   display: block;
-  width: 100%;
+  width: 35px;
   height: auto;
 `
 
@@ -94,32 +97,7 @@ const WeatherPage = ({ weather, resetAll }) => {
   const handleReset = async () => {
     await resetAll()
   }
-  if (loading) {
-    return (
-      <Container>
-        <Header>
-          <LogoContainer>
-            <LogoImg src={Logo} />
-          </LogoContainer>
-          <HeaderTitle>Forecasts</HeaderTitle>
-          <ButtonsContainer>
-            <ButtonLink to="/create">
-              <Icon src={PencilIcon} />
-            </ButtonLink>
-            <ButtonLink to="/create" onClick={handleReset}>
-              <Icon src={UndoIcon} />
-            </ButtonLink>
-          </ButtonsContainer>
-        </Header>
-        <BarLoader
-          sizeUnit={"px"}
-          size={150}
-          color={theme.colors.primary}
-          loading={loading}
-        />
-      </Container>
-    )
-  }
+
   return (
     <Container>
       <Header>
@@ -136,13 +114,17 @@ const WeatherPage = ({ weather, resetAll }) => {
           </ButtonLink>
         </ButtonsContainer>
       </Header>
-      <CheckpointsList>
-        {roadmap.length === forecasts.length && roadmap.length > 0 && roadmap.map((cp, i) => {
-          return (
-            <WeatherCard key={`cp-${cp.timestamp}`} cp={cp} forecast={forecasts[i]} />
-          )
-        })}
-      </CheckpointsList>
+
+      { loading
+          ? <BarLoader sizeUnit={"px"} size={150} color={theme.colors.primary} loading={loading} />
+          : <CheckpointsList>
+              {roadmap.length === forecasts.length && roadmap.length > 0 && roadmap.map((cp, i) => {
+                return (
+                  <WeatherCard key={`cp-${cp.timestamp}`} cp={cp} forecast={forecasts[i]} />
+                )
+              })}
+            </CheckpointsList>
+      }
     </Container>
   )
 }
