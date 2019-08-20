@@ -48,7 +48,7 @@ const DateRange = ({
       <InputContainer>
         <Label>From (included)</Label>
         <StyledDateInput
-          placeholderText="dd/MM/yyyy"
+          placeholderText="dd/mm/yyyy"
           selected={startDate}
           selectsStart
           startDate={startDate}
@@ -62,7 +62,7 @@ const DateRange = ({
       <InputContainer>
         <Label>To (included)</Label>
         <StyledDateInput
-          placeholderText="dd/MM/yyyy"
+          placeholderText="dd/mm/yyyy"
           selected={endDate}
           selectsEnd
           startDate={startDate}
