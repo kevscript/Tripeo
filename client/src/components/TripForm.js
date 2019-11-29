@@ -28,7 +28,7 @@ const FormContainer = styled.div`
   padding: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   background: rgba(255,255,255,1);
@@ -44,13 +44,15 @@ const InputsContainer = styled.div`
 `
 
 const PlacesContainer = styled(InputsContainer)`
-  margin: 10px 0;
+  margin: 40px 0 20px;
   div {
     width: 100%;
   }
 `
 
-const DateContainer = styled(InputsContainer)``
+const DateContainer = styled(InputsContainer)`
+  display: flex;
+`
 
 const ButtonContainer = styled.div`
   margin: 25px 0;
@@ -63,8 +65,8 @@ const CloseButton = styled.div`
   position: absolute;
   top: 35px;
   right: 40px;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   transition: all 0.2s ease-in-out;
 
   &:hover {
@@ -121,22 +123,24 @@ const TripForm = ({ form, changeLocation, changeStartDate, changeEndDate, change
 
   return ReactDOM.createPortal(
     <FormContainer>
-      <PlacesContainer>
-        <PlacesInput
-          handleLocation={handleLocation}
-          handleClear={handleClear}
-        />
-      </PlacesContainer>
-      <DateContainer>
-        <DateRange
-          handleStartDateChange={handleStartDateChange}
-          startDate={start}
-          startMin={startMin}
-          handleEndDateChange={handleEndDateChange}
-          endDate={end}
-          endMin={endMin}
-        />
-      </DateContainer>
+      <div>
+        <PlacesContainer>
+          <PlacesInput
+            handleLocation={handleLocation}
+            handleClear={handleClear}
+          />
+        </PlacesContainer>
+        <DateContainer>
+          <DateRange
+            handleStartDateChange={handleStartDateChange}
+            startDate={start}
+            startMin={startMin}
+            handleEndDateChange={handleEndDateChange}
+            endDate={end}
+            endMin={endMin}
+          />
+        </DateContainer>
+      </div>
       {location && start && end
         ? <ButtonContainer>
           <Button handleClick={handleFormSubmit}>Add Checkpoint</Button>
