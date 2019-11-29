@@ -21,7 +21,7 @@ const PlacesInput = ({ handleLocation, handleClear }) => {
       <Label data-test='Label'>Location (cities, adresses, ...)</Label>
       <AlgoliaPlaces
         data-test="AlgoliaInput"
-        placeholder='eg. Paris, Ile-de-France, France'
+        placeholder='Where are we going?'
 
         options={{
           appId: process.env.REACT_APP_ALGOLIA_APP_ID,

@@ -1,5 +1,10 @@
 .algolia-places {
-  width: 100%;
+  min-width: 300px;
+  font-size: 14px;
+}
+
+.ap-dataset-places {
+  font-size: 13px;
 }
 
 .agolia-places > input {
