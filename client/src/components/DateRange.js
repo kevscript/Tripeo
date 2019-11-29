@@ -9,7 +9,7 @@ const RangeContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: space-between;
+  align-items: center;
 `
 
 const StyledDateInput = styled(DatePicker)`
@@ -21,6 +21,20 @@ const StyledDateInput = styled(DatePicker)`
   font-weight: 600;
   width: 125px;
   color: ${props => props.theme.colors.primary};
+  text-align: center;
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-weight: 400;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    font-weight: 500;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    font-weight: 500;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    font-weight: 500;
+  }
 `
 
 const Label = styled.span`
@@ -57,6 +71,7 @@ const DateRange = ({
           dateFormat="dd/MM/yyyy"
           minDate={startMin}
           data-test="startRange"
+          popperPlacement="bottom-center"
         />
       </InputContainer>
       <InputContainer>
@@ -71,6 +86,7 @@ const DateRange = ({
           dateFormat="dd/MM/yyyy"
           minDate={endMin}
           data-test="endRange"
+          popperPlacement="bottom-center"
         />
       </InputContainer>
     </RangeContainer>
