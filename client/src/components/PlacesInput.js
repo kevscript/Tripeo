@@ -4,6 +4,12 @@ import '../styles/algoliaplaces.css'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
 const Label = styled.span`
   font-size: 14px;
   margin-bottom: 5px;
@@ -11,7 +17,7 @@ const Label = styled.span`
 
 const PlacesInput = ({ handleLocation, handleClear }) => {
   return (
-    <div>
+    <InputContainer>
       <Label data-test='Label'>Location (cities, adresses, ...)</Label>
       <AlgoliaPlaces
         data-test="AlgoliaInput"
@@ -39,7 +45,7 @@ const PlacesInput = ({ handleLocation, handleClear }) => {
         onError={''/*({ message }) =>
           console.log('Fired when we could not make the request to Algolia Places servers for any reason but reaching your rate limit.')*/}
       />
-    </div>
+    </InputContainer>
   )
 }
 
