@@ -72,6 +72,7 @@ const DateRange = ({
           minDate={startMin}
           data-test="startRange"
           popperPlacement="bottom"
+          onFocus={(e) => e.target.readOnly = true}
         />
       </InputContainer>
       <InputContainer>
@@ -87,6 +88,7 @@ const DateRange = ({
           minDate={endMin}
           data-test="endRange"
           popperPlacement="bottom"
+          onFocus={(e) => e.target.readOnly = true}
         />
       </InputContainer>
     </RangeContainer>
