@@ -11063,7 +11063,7 @@
       "integrity": "sha512-X8D+5CqumSUwoq/x5d8O0neYDRmPmwVcyCktVbs5juXV4s73beV6sMf87hM6lxMSanWeB+jpx8waxJcPqsmCIg==",
       "requires": {
         "classnames": "^2.2.5",
-        "date-fns": "^2.0.0-alpha.23",
+        "date-fns": "^2.4.0",
         "prop-types": "^15.6.0",
         "react-onclickoutside": "^6.7.1",
         "react-popper": "^1.0.2"
