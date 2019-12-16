@@ -19,7 +19,7 @@ const ContentContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 50px 0;
+  padding: 100px 0;
 `
 
 const Title = styled.h1`

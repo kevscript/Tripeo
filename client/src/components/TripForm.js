@@ -25,7 +25,7 @@ const FormContainer = styled.div`
   right: 0;
   bottom: 0;
   height: 100vh;
-  padding: 30px;
+  padding: 30px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

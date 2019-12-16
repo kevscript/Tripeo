@@ -71,7 +71,7 @@ const DateRange = ({
           dateFormat="dd/MM/yyyy"
           minDate={startMin}
           data-test="startRange"
-          popperPlacement="bottom-center"
+          popperPlacement="bottom"
         />
       </InputContainer>
       <InputContainer>
@@ -86,7 +86,7 @@ const DateRange = ({
           dateFormat="dd/MM/yyyy"
           minDate={endMin}
           data-test="endRange"
-          popperPlacement="bottom-center"
+          popperPlacement="bottom"
         />
       </InputContainer>
     </RangeContainer>
