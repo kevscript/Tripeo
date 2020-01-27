@@ -5,7 +5,7 @@ import Button from '../components/Button'
 import CheckpointsList from '../components/CheckpointsList'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { createRoadmap, fetchWeather, openForm } from '../actions'
+import { openForm } from '../actions'
 import Logo from '../assets/icons/sunset.svg'
 import PropTypes from 'prop-types'
 
@@ -19,19 +19,6 @@ const Container = styled.div`
   display: flex;
   align-items: center;
 `
-
-/*const TripNameInput = styled.input`
-  background: 0;
-  border: 0;
-  font-size: 2rem;
-  font-style: normal;
-  text-align: center;
-  outline: 0;
-
-  &:focus {
-    font-style: italic;
-  }
-`*/
 
 const CheckpointsContainer = styled.div`
   display: flex;
@@ -140,14 +127,9 @@ const LogoImg = styled.img`
   height: auto;
 `
 
-const CreatePage = ({ trip, createRoadmap, fetchWeather, form, openForm }) => {
+const CreatePage = ({ trip, form, openForm }) => {
   const { opened } = form
   const { checkpoints } = trip
-
-  const handleWeather = () => {
-    createRoadmap()
-    fetchWeather()
-  }
 
   const handleFormOpen = () => {
     openForm()
@@ -169,7 +151,7 @@ const CreatePage = ({ trip, createRoadmap, fetchWeather, form, openForm }) => {
       }
       {checkpoints.length > 0 && opened === false &&
         <ButtonContainer>
-          <Button big handleClick={handleWeather}>
+          <Button big>
             <ButtonLink to='/weather'>
               Forecast
             </ButtonLink>
@@ -188,15 +170,11 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  createRoadmap,
-  fetchWeather,
   openForm
 }
 
 CreatePage.propTypes = {
   trip: PropTypes.object,
-  createRoadmap: PropTypes.func,
-  fetchWeather: PropTypes.func,
   form: PropTypes.object,
   openForm: PropTypes.func
 }

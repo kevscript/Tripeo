@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { resetAll } from '../actions'
+import { resetAll, fetchWeather } from '../actions'
 import WeatherCard from '../components/WeatherCard'
 import { Link } from 'react-router-dom'
 import UndoIcon from '../assets/icons/undo.svg'
@@ -90,10 +90,14 @@ const LogoImg = styled.img`
   height: auto;
 `
 
-const WeatherPage = ({ weather, resetAll }) => {
+const WeatherPage = ({ weather, trip, resetAll, fetchWeather }) => {
+  const { forecasts, loading } = weather
 
-  const { roadmap, forecasts, loading } = weather
+  useEffect(() =>{ 
+    fetchWeather()
+  }, [fetchWeather])
 
+  
   const handleReset = async () => {
     await resetAll()
   }
@@ -118,7 +122,7 @@ const WeatherPage = ({ weather, resetAll }) => {
       { loading
           ? <BarLoader sizeUnit={"px"} size={150} color={theme.colors.primary} loading={loading} />
           : <CheckpointsList>
-              {roadmap.length === forecasts.length && roadmap.length > 0 && roadmap.map((cp, i) => {
+              {trip.roadmap.length === forecasts.length && trip.roadmap.length > 0 && trip.roadmap.map((cp, i) => {
                 return (
                   <WeatherCard key={`cp-${cp.timestamp}`} cp={cp} forecast={forecasts[i]} />
                 )
@@ -130,16 +134,20 @@ const WeatherPage = ({ weather, resetAll }) => {
 }
 
 const mapStateToProps = (state) => ({
-  weather: state.weather
+  weather: state.weather,
+  trip: state.trip
 })
 
 const mapDispatchToProps = {
-  resetAll
+  resetAll,
+  fetchWeather
 }
 
 WeatherPage.propTypes = {
   weather: PropTypes.object,
-  resetAll: PropTypes.func
+  trip: PropTypes.object,
+  resetAll: PropTypes.func,
+  fetchWeather: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WeatherPage)
