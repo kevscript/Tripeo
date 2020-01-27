@@ -2,17 +2,25 @@ import {
   CHANGE_TRIP_NAME,
   ADD_NEW_CHECKPOINT,
   DELETE_CHECKPOINT,
-  RESET_ALL
+  RESET_ALL,
+  ADD_CP_TO_ROADMAP
 } from '../actions/types'
 
 const initialState = {
   name: '',
-  checkpoints: []
+  checkpoints: [],
+  roadmap: []
 }
 
 export default (state = initialState, action) => {
 
   switch (action.type) {
+
+    case ADD_CP_TO_ROADMAP:
+      return {
+        ...state,
+        roadmap: [...state.roadmap, ...action.payload ]
+      }
 
     case CHANGE_TRIP_NAME:
       return {

@@ -15,7 +15,9 @@ import {
   FETCH_WEATHER_ERROR,
   FETCH_WEATHER_SUCCESS,
   RESET_ALL,
-  CLEAR_LOCATION
+  CLEAR_LOCATION,
+  ADD_CP_TO_ROADMAP,
+  REMOVE_CP_FROM_ROADMAP
 } from './types'
 import parseLocaleDate from '../utils/parseLocaleDate'
 
@@ -84,6 +86,7 @@ export const addNewCheckpoint = () =>
     // gets location and date range of Form
     const form = getState().form
     const { location, start, startLocale, end, endLocale } = form
+    const cpId = `${location.name.toLowerCase()}-${startLocale}`
 
     dispatch({
       type: ADD_NEW_CHECKPOINT,
@@ -92,8 +95,49 @@ export const addNewCheckpoint = () =>
         startDate: startLocale,
         endDate: endLocale,
         start: start,
-        end: end
+        end: end,
+        id: cpId
       }
+    })
+
+    const checkpointsToAdd = []
+    // creates timestamps from dates
+    const startTs = Date.parse(parseLocaleDate(startLocale))
+    const endTs = Date.parse(parseLocaleDate(endLocale))
+
+    // numberOfDays represents the number of days between start and end dates (acts as the condition of the forLoop and sets the iterative value)
+    let numberOfDays
+    // forLoopStart is an integer that represents the start of the loop (either 0 or 1)
+    let forLoopStart
+    // if the start and end dates are the same (1 day checkpoint)
+    if (startTs === endTs) {
+      // sets loop start and loop iteration limit to same value so it runs only once
+      numberOfDays = 1
+      forLoopStart = 1
+    } else {
+      // 86400000 represents 1 day in timestamps units
+      numberOfDays = Math.round(Math.abs((startTs - endTs) / 86400000))
+      forLoopStart = 0
+    }
+
+    let stamp = startTs
+    // for each day of difference, push a checkpoint to the roadmap
+    for (let i = forLoopStart; i <= numberOfDays; i++) {
+      checkpointsToAdd.push({
+        location: { ...location },
+        timestamp: stamp,
+        date: parseLocaleDate(new Date(stamp).toLocaleDateString()),
+        checkpoint: cpId
+      })
+      // adds 1 day to the timestamp for the next iteration (1 iteration / day)
+      stamp += 86400000
+    }
+
+    console.log('roadmap after cp creation', checkpointsToAdd)
+
+    dispatch({
+      type: ADD_CP_TO_ROADMAP,
+      payload: [...checkpointsToAdd]
     })
 
     // reset form and passing the end date of the last checkpoint from the Form input to avoid overlapping dates between checkpoints
