@@ -81,10 +81,10 @@ const Arrow = styled.img`
 
 export const CheckpointCard = ({ checkpoint, deleteCheckpoint }) => {
 
-  const { location, startDate, endDate } = checkpoint
+  const { location, startDate, endDate, id } = checkpoint
 
   const handleDelete = () => {
-    deleteCheckpoint(startDate)
+    deleteCheckpoint(id)
   }
 
   return (
