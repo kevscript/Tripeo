@@ -1,5 +1,4 @@
 import {
-  CREATE_ROADMAP,
   FETCH_WEATHER_BEGIN,
   FETCH_WEATHER_ERROR,
   FETCH_WEATHER_SUCCESS,
@@ -8,17 +7,11 @@ import {
 
 const initialState = {
   loading: true,
-  roadmap: [],
   forecasts: []
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case CREATE_ROADMAP:
-      return {
-        ...state,
-        roadmap: action.payload
-      }
 
     case FETCH_WEATHER_BEGIN:
       return {
