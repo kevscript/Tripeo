@@ -10,7 +10,6 @@ import {
   DELETE_CHECKPOINT,
   RESET_FORM,
   OPEN_FORM,
-  CREATE_ROADMAP,
   FETCH_WEATHER_BEGIN,
   FETCH_WEATHER_ERROR,
   FETCH_WEATHER_SUCCESS,
@@ -86,7 +85,7 @@ export const addNewCheckpoint = () =>
     // gets location and date range of Form
     const form = getState().form
     const { location, start, startLocale, end, endLocale } = form
-    const cpId = `${location.name.toLowerCase()}-${startLocale}`
+    const cpId = `${location.name.trim().toLowerCase()}-${startLocale}`
 
     dispatch({
       type: ADD_NEW_CHECKPOINT,
@@ -133,8 +132,6 @@ export const addNewCheckpoint = () =>
       stamp += 86400000
     }
 
-    console.log('roadmap after cp creation', checkpointsToAdd)
-
     dispatch({
       type: ADD_CP_TO_ROADMAP,
       payload: [...checkpointsToAdd]
@@ -153,12 +150,20 @@ export const deleteCheckpoint = (id) =>
   (dispatch, getState) => {
     // get the checkpoints array
     const checkpoints = [...getState().trip.checkpoints]
+    const roadmap = [...getState().trip.roadmap]
+
     // filter the specific checkpoint out
-    const newCheckpoints = checkpoints.filter(cp => cp.startDate !== id)
+    const newCheckpoints = checkpoints.filter(cp => cp.id !== id)
+    const newRoadmap = roadmap.filter(el => el.checkpoint !== id)
 
     dispatch({
       type: DELETE_CHECKPOINT,
       payload: newCheckpoints
+    })
+
+    dispatch({
+      type: REMOVE_CP_FROM_ROADMAP,
+      payload: newRoadmap
     })
 
     // get the new checkpoints after dispatch
@@ -181,62 +186,6 @@ export const deleteCheckpoint = (id) =>
     })
   }
 
-// creates a day-by-day road map from all the checkpoints 
-export const createRoadmap = () =>
-  (dispatch, getState) => {
-    // array of all checkpoints
-    const checkpoints = getState().trip.checkpoints
-    let roadmap = []
-
-    // for each checkpoint in array
-    checkpoints.map(cp => {
-      const location = cp.location
-      // parses dates to a string understandable by the darkSky Api
-      const start = parseLocaleDate(cp.startDate)
-      const end = parseLocaleDate(cp.endDate)
-      // creates timestamps from dates
-      const startTs = Date.parse(start)
-      const endTs = Date.parse(end)
-
-      // numberOfDays represents the number of days between start and end dates (acts as the condition of the forLoop and sets the iterative value)
-      let numberOfDays
-      // forLoopStart is an integer that represents the start of the loop (either 0 or 1)
-      let forLoopStart
-      // if the start and end dates are the same (1 day checkpoint)
-      if (startTs === endTs) {
-        // sets loop start and loop iteration limit to same value so it runs only once
-        numberOfDays = 1
-        forLoopStart = 1
-      } else {
-        // 86400000 represents 1 day in timestamps units
-        numberOfDays = Math.round(Math.abs((startTs - endTs) / 86400000))
-        forLoopStart = 0
-      }
-
-      let stamp = startTs
-      // for each day of difference, push a checkpoint to the roadmap
-      for (let i = forLoopStart; i <= numberOfDays; i++) {
-        roadmap.push({
-          location: { ...location },
-          timestamp: stamp,
-          date: parseLocaleDate(new Date(stamp).toLocaleDateString())
-        })
-        // adds 1 day to the timestamp for the next iteration (1 iteration / day)
-        stamp += 86400000
-      }
-
-      return null
-    })
-
-    dispatch({
-      type: CREATE_ROADMAP,
-      payload: roadmap
-    })
-  }
-
-
-
-
 
 // FETCH WEATHER
 export const fetchWeatherBegin = () => ({
@@ -258,7 +207,7 @@ export const fetchWeather = () => {
   return (dispatch, getState) => {
     dispatch(fetchWeatherBegin())
 
-    const roadmap = getState().weather.roadmap
+    const roadmap = getState().trip.roadmap
 
     // return a promise for every element in the array
     const places = roadmap.map(place => {
