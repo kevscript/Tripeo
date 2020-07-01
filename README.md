@@ -1,6 +1,13 @@
 ## 1. About
 
-Tripeo is a React app providing you with weather data for your trips. You create a roadmap of locations, and the app does the rest. [Live Demo](https://tripeo.herokuapp.com/)
+Tripeo is a React app providing you with weather data for your trips. 
+
+You create a day by day roadmap of locations, and the app gives you weather forecasts. [Live Demo](https://tripeo.herokuapp.com/)
+
+ <br /> <br />
+![image of tripeo app](./images/tripeo-iphone-x-2.png)
+![image of tripeo app](./images/tripeo-iphone-x-1.png)
+ <br /> <br />
 
 It leverages the [DarkSky Api](https://darksky.net/dev) for weather forecasts and [Algolia Places](https://community.algolia.com/places/) for input autocompletion (algolia-places-react hooks the api to React).
 
